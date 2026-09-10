@@ -37,6 +37,7 @@ export function AudioReactive() {
     }
     try { resize(); draw(); window.addEventListener('resize', resize) } catch { setSupported(false) }
     return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', resize) }
+    window.dispatchEvent(new CustomEvent('zeopspace-energy', { detail: playing ? 1 : 0 }))
   }, [playing])
 
   if (!supported) return null

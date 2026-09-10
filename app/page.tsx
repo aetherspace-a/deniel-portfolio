@@ -10,6 +10,7 @@ import { AudioReactive } from '@/components/audio-reactive'
 import { CommandPalette } from '@/components/command-palette'
 import { WorkAssistant } from '@/components/work-assistant'
 import { PremiumReveal } from '@/components/premium-motion'
+import { ParticleEcosystem } from '@/components/particle-ecosystem'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -142,6 +143,7 @@ export default function Page() {
 
   return (
     <>
+      <ParticleEcosystem />
       <AudioReactive />
       <CommandPalette onAssistant={() => setAssistantOpen(true)} />
       <WorkAssistant open={assistantOpen} onClose={() => setAssistantOpen(false)} />

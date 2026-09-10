@@ -169,9 +169,11 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .reveal-complete .reveal-tool-label, .reveal-complete .reveal-status { visibility: hidden; }
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .cursor-field, .cursor-glow, .cursor-blob, .cursor-trail, .cursor-label, .reveal-tool-label, .reveal-status { display: none; } .reveal-active { outline: none; animation: none; } }
 
-.portfolio-shell { position: relative; z-index: 1; min-height: 100vh; background: var(--background); color: var(--foreground); }
+.portfolio-shell { position: relative; z-index: 1; min-height: 100vh; background: transparent; color: var(--foreground); }
 .content-section, #work, #contact { position: relative; isolation: isolate; }
 .content-section::before, #work::before, #contact::before { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent, rgb(255 255 255 / 0.018) 50%, transparent); content: ''; pointer-events: none; }
+.particle-ecosystem { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100vh; pointer-events: none; opacity: .14; mix-blend-mode: screen; filter: blur(.35px); }
+@media (max-width: 640px), (prefers-reduced-motion: reduce) { .particle-ecosystem { display: none; } }
 .light-tracing { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100vh; pointer-events: none; opacity: 0.52; mix-blend-mode: screen; transition: opacity 800ms ease; }
 .scroll-progress { position: fixed; top: 0; left: 0; z-index: 70; width: var(--scroll-progress, 0%); height: 2px; background: var(--foreground); transform-origin: left; transition: width 120ms linear; pointer-events: none; }
 .project-row, .music-link, .stack-item { position: relative; overflow: hidden; }

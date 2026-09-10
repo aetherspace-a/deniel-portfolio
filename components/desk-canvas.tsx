@@ -13,7 +13,7 @@ const itemCopy: Record<DeskItem, { label: string; title: string; text: string; h
 }
 
 function Coffee({ onClick }: { onClick: () => void }) {
-  return <group position={[-1.85, 0.42, 0.2]} rotation={[0, 0.2, 0]} onClick={onClick}>
+  return <group position={[-1.85, 0.42, 0.2]} rotation={[0, 0.2, 0]} onClick={onClick} onPointerOver={(event) => { event.stopPropagation(); document.body.style.cursor = 'pointer' }} onPointerOut={() => { document.body.style.cursor = '' }}>
     <mesh castShadow><cylinderGeometry args={[0.58, 0.5, 0.75, 32]} /><meshStandardMaterial color="#f4f1e8" roughness={0.72} /></mesh>
     <mesh position={[0, 0.39, 0]}><cylinderGeometry args={[0.49, 0.49, 0.04, 32]} /><meshStandardMaterial color="#211b16" roughness={0.5} /></mesh>
     <mesh position={[0.59, 0.05, 0]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.25, 0.08, 16, 24]} /><meshStandardMaterial color="#f4f1e8" roughness={0.72} /></mesh>
@@ -22,7 +22,7 @@ function Coffee({ onClick }: { onClick: () => void }) {
 }
 
 function Sketchbook({ onClick }: { onClick: () => void }) {
-  return <group position={[0.1, 0.28, 0.15]} rotation={[0.02, -0.25, -0.08]} onClick={onClick}>
+  return <group position={[0.1, 0.28, 0.15]} rotation={[0.02, -0.25, -0.08]} onClick={onClick} onPointerOver={(event) => { event.stopPropagation(); document.body.style.cursor = 'pointer' }} onPointerOut={() => { document.body.style.cursor = '' }}>
     <mesh castShadow><boxGeometry args={[2.2, 0.18, 2.65]} /><meshStandardMaterial color="#181818" roughness={0.9} /></mesh>
     <mesh position={[0, 0.11, 0]}><boxGeometry args={[2.02, 0.025, 2.47]} /><meshStandardMaterial color="#e8e3d8" roughness={0.82} /></mesh>
     <mesh position={[-0.45, 0.135, 0.2]} rotation={[0, 0, -0.2]}><boxGeometry args={[0.08, 0.01, 1.65]} /><meshStandardMaterial color="#151515" /></mesh>
@@ -31,7 +31,7 @@ function Sketchbook({ onClick }: { onClick: () => void }) {
 }
 
 function Polaroids({ onClick }: { onClick: () => void }) {
-  return <group position={[2.05, 0.3, 0.15]} rotation={[0, -0.15, 0.12]} onClick={onClick}>
+  return <group position={[2.05, 0.3, 0.15]} rotation={[0, -0.15, 0.12]} onClick={onClick} onPointerOver={(event) => { event.stopPropagation(); document.body.style.cursor = 'pointer' }} onPointerOut={() => { document.body.style.cursor = '' }}>
     {[[-0.38, 0, 0.2, -0.12], [0.32, 0.02, -0.08, 0.13]].map(([x, y, z, r], index) => <group key={index} position={[x, y, z]} rotation={[0, 0, r]}>
       <mesh castShadow><boxGeometry args={[1.35, 0.1, 1.6]} /><meshStandardMaterial color="#f4f1e8" roughness={0.78} /></mesh>
       <mesh position={[0, 0.06, -0.05]}><boxGeometry args={[1.03, 0.02, 0.88]} /><meshStandardMaterial color={index === 0 ? '#4f5555' : '#72796f'} roughness={0.9} /></mesh>
