@@ -67,6 +67,13 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .hero-bridge p { max-width: 34rem; font-size: 1rem; line-height: 1.6; color: var(--muted-foreground); }
 .section-statement { max-width: 52rem; font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 5.6rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
 .contact-title { font-size: clamp(3.8rem, 10vw, 10rem); }
+@media (min-width: 641px) {
+  .stack-section .stack-intro,
+  .stack-section .stack-list {
+    width: min(100%, 54rem);
+    margin-inline: auto;
+  }
+}
 @media (max-width: 640px) {
   .site-header { padding-top: 1.25rem; padding-bottom: 1.25rem; }
   .hero { padding-top: 2rem; }
