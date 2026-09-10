@@ -160,7 +160,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="desk" className="content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Desk study</Meta></Reveal><Reveal delay={60}><Meta>A tactile index</Meta></Reveal></div><Reveal><div className="desk-intro"><p className="desk-statement"><LetterReveal>Pick up a thread. See where it leads.</LetterReveal></p><p className="desk-note"><LetterReveal>Three objects from the desk, each pointing to a different part of the work.</LetterReveal></p></div></Reveal><DeskCanvas /></section>
+      <section id="desk" className="desk-section content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><div className="desk-heading mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Desk study</Meta></Reveal><Reveal delay={60}><Meta>A tactile index</Meta></Reveal></div><Reveal><div className="desk-intro"><p className="desk-statement"><LetterReveal>Pick up a thread. See where it leads.</LetterReveal></p><p className="desk-note"><LetterReveal>Three objects from the desk, each pointing to a different part of the work.</LetterReveal></p></div></Reveal><DeskCanvas /></section>
 
       <section id="work" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
         <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Selected work</Meta></Reveal><Reveal delay={60}><Meta>Built in public</Meta></Reveal></div>
