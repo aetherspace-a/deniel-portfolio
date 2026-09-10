@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { SmoothScrollProvider } from '@/components/smooth-scroll-provider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://deniel.lol'),
@@ -38,5 +39,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { colorScheme: 'dark', themeColor: '#000000', userScalable: false }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className="bg-background" style={{ '--font-display': 'Fraunces, Georgia, "Times New Roman", serif', '--font-body': 'IBM Plex Sans, "Helvetica Neue", Arial, sans-serif', '--font-meta': 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' } as React.CSSProperties}><body>{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="en" className="bg-background" style={{ '--font-display': 'Fraunces, Georgia, "Times New Roman", serif', '--font-body': 'IBM Plex Sans, "Helvetica Neue", Arial, sans-serif', '--font-meta': 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' } as React.CSSProperties}><body><SmoothScrollProvider>{children}</SmoothScrollProvider>{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }

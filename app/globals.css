@@ -93,10 +93,9 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .hero-bridge { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 2fr); gap: 2rem; margin-top: clamp(4rem, 9vw, 8rem); border-top: 1px solid var(--border); padding-top: 1.25rem; }
 .hero-bridge p { max-width: 34rem; font-size: 1rem; line-height: 1.6; color: var(--muted-foreground); }
 .section-statement { max-width: 52rem; font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 5.6rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
-.portfolio-shell > section { opacity: .58; transform: translateY(2.25rem); transition: opacity 900ms cubic-bezier(.22,1,.36,1), transform 900ms cubic-bezier(.22,1,.36,1); }
-.portfolio-shell > section.scroll-active { opacity: 1; transform: translateY(0); }
 .hero { opacity: 1 !important; transform: none !important; }
-@media (prefers-reduced-motion: reduce) { .portfolio-shell > section { opacity: 1; transform: none; transition: none; } }
+.parallax-shell { will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .parallax-shell { transform: none !important; } }
 .contact-title { font-size: clamp(3.8rem, 10vw, 10rem); }
 .loading-screen { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--background); padding: 1.25rem; animation: loading-exit 420ms ease 3.15s forwards; }
 .loading-state { display: grid; justify-items: center; width: min(100%, 34rem); gap: 1.25rem; text-align: center; }

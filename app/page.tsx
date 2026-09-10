@@ -10,6 +10,7 @@ import { AudioReactive } from '@/components/audio-reactive'
 import { CommandPalette } from '@/components/command-palette'
 import { WorkAssistant } from '@/components/work-assistant'
 import { PremiumReveal } from '@/components/premium-motion'
+import { MotionIn, Parallax, VelocityHeading } from '@/components/parallax-motion'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -125,15 +126,6 @@ export default function Page() {
   const [showCookies, setShowCookies] = useState(true)
   const [assistantOpen, setAssistantOpen] = useState(false)
 
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('.portfolio-shell > section'))
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => entry.target.classList.toggle('scroll-active', entry.isIntersecting))
-    }, { threshold: 0.18, rootMargin: '-8% 0px -8% 0px' })
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <>
       <AudioReactive />
@@ -157,7 +149,7 @@ export default function Page() {
       <section className="hero mx-auto max-w-[1440px] px-5 pb-20 pt-14 sm:px-8 sm:pb-28 sm:pt-20 lg:px-12 lg:pb-40 lg:pt-28">
         <Reveal><div className="hero-meta flex items-center justify-end border-y border-border py-3"><Meta>Philippines — 2026</Meta></div></Reveal>
         <div className="hero-copy">
-          <Reveal delay={100}><h1 className="hero-title"><LetterReveal className="block" >Deniel John</LetterReveal> <LetterReveal className="hero-prado" >Prado</LetterReveal></h1></Reveal>
+          <Reveal delay={100}><VelocityHeading><h1 className="hero-title"><Parallax speed="slow"><LetterReveal className="block" >Deniel John</LetterReveal></Parallax> <Parallax speed="fast"><LetterReveal className="hero-prado" >Prado</LetterReveal></Parallax></h1></VelocityHeading></Reveal>
           <Reveal delay={180}><PremiumReveal delay={0.16}><p className="hero-subhead"><LetterReveal>A generalist working across community, documentation, design, and code.</LetterReveal></p></PremiumReveal></Reveal>
         </div>
         <Reveal delay={240}><div className="hero-bridge"><Meta>01 / A way of working</Meta><p><LetterReveal>I help people find their way through complex work — coordinating communities, shaping documentation, and building useful software.</LetterReveal></p></div></Reveal>
@@ -165,18 +157,18 @@ export default function Page() {
 
       <section id="about" className="content-section section-break mx-auto max-w-[1440px] border-t border-border px-5 py-24 sm:px-8 sm:py-32 lg:grid lg:grid-cols-[1fr_2fr] lg:gap-10 lg:px-12 lg:py-44">
         <Reveal><Meta>02 — About</Meta></Reveal>
-        <Reveal delay={100}><div className="section-content mt-12 lg:mt-0"><p className="section-statement"><LetterReveal>A jack of all trades, with a soft spot for the seams between them.</LetterReveal></p><p className="section-body mt-10 max-w-xl"><LetterReveal>My work moves between community leadership, design, technical writing, and code. I am interested in the connective tissue: the language, systems, and small decisions that help good ideas become useful in the real world.</LetterReveal></p></div></Reveal>
+        <MotionIn delay={0.08}><div className="section-content mt-12 lg:mt-0"><VelocityHeading><p className="section-statement"><LetterReveal>A jack of all trades, with a soft spot for the seams between them.</LetterReveal></p></VelocityHeading><Parallax speed="slow"><p className="section-body mt-10 max-w-xl"><LetterReveal>My work moves between community leadership, design, technical writing, and code. I am interested in the connective tissue: the language, systems, and small decisions that help good ideas become useful in the real world.</LetterReveal></p></Parallax></div></MotionIn>
       </section>
 
       <section id="stack" className="content-section stack-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
         <div className="section-heading mb-12 flex items-end justify-between gap-8"><Reveal><Meta>03 — Tools &amp; stack</Meta></Reveal><Reveal delay={60}><Meta>A working vocabulary</Meta></Reveal></div>
-        <Reveal><div className="stack-intro"><p className="stack-statement"><LetterReveal>The tools stay quiet. The work does the talking.</LetterReveal></p><p className="stack-note"><LetterReveal>A practical stack for building clear paths through complicated things.</LetterReveal></p></div></Reveal>
+        <MotionIn><div className="stack-intro"><VelocityHeading><p className="stack-statement"><LetterReveal>The tools stay quiet. The work does the talking.</LetterReveal></p></VelocityHeading><Parallax speed="slow"><p className="stack-note"><LetterReveal>A practical stack for building clear paths through complicated things.</LetterReveal></p></Parallax></div></MotionIn>
         <div className="stack-list border-y border-border">
           {tools.map((tool, index) => <Reveal key={tool.name} delay={index * 45}><div className="stack-item group"><span className="stack-index">0{index + 1}</span><img src={`https://cdn.simpleicons.org/${tool.icon}/ffffff`} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-75 transition-opacity group-hover:opacity-100" /><span className="stack-name">{tool.name}</span><span className="stack-role">{index < 3 ? 'language' : index === 3 ? 'community' : 'platform'}</span></div></Reveal>)}
         </div>
       </section>
 
-      <section id="desk" className="desk-section content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><div className="desk-heading mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Desk study</Meta></Reveal><Reveal delay={60}><Meta>A tactile index</Meta></Reveal></div><Reveal><div className="desk-intro"><p className="desk-statement"><LetterReveal>Pick up a thread. See where it leads.</LetterReveal></p><p className="desk-note"><LetterReveal>Three objects from the desk, each pointing to a different part of the work.</LetterReveal></p></div></Reveal><DeskCanvas /></section>
+      <section id="desk" className="desk-section content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><div className="desk-heading mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Desk study</Meta></Reveal><Reveal delay={60}><Meta>A tactile index</Meta></Reveal></div><MotionIn><div className="desk-intro"><VelocityHeading><p className="desk-statement"><LetterReveal>Pick up a thread. See where it leads.</LetterReveal></p></VelocityHeading><Parallax speed="slow"><p className="desk-note"><LetterReveal>Three objects from the desk, each pointing to a different part of the work.</LetterReveal></p></Parallax></div></MotionIn><Parallax speed="normal"><DeskCanvas /></Parallax></section>
 
       <section id="work" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
         <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>05 — Selected work</Meta></Reveal><Reveal delay={60}><Meta>Built in public</Meta></Reveal></div>
