@@ -114,9 +114,18 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-.cursor-trail, .cursor-label { position: fixed; inset: 0; pointer-events: none; }
-.cursor-trail { z-index: 5; overflow: hidden; }
-.cursor-trail span { position: absolute; left: 0; top: 0; width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--foreground); opacity: 0; transform: translate3d(-100px, -100px, 0); filter: blur(1px); transition: opacity 700ms ease; will-change: transform, opacity; }
-.cursor-label { z-index: 60; inset: auto; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.65rem 0.4rem 0.45rem; border-radius: 0.35rem; background: var(--foreground); color: var(--background); font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: -0.01em; box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 24%); white-space: nowrap; transform: translate3d(-100px, -100px, 0); will-change: transform; }
-.cursor-arrow { width: 0; height: 0; border-top: 0.3rem solid transparent; border-bottom: 0.3rem solid transparent; border-left: 0.45rem solid var(--background); transform: rotate(-35deg); }
-@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .cursor-trail, .cursor-label { display: none; } }
+.cursor-glow, .cursor-trail, .cursor-label { position: fixed; pointer-events: none; }
+.cursor-glow { z-index: 1; left: -12vw; top: -12vh; width: 24vw; height: 24vh; border-radius: 999px; background: rgb(255 255 255 / 6%); filter: blur(3rem); mix-blend-mode: screen; will-change: transform; }
+.cursor-trail { z-index: 2; inset: 0; overflow: hidden; }
+.cursor-trail span { position: absolute; left: 0; top: 0; width: 0.45rem; height: 0.45rem; border-radius: 999px; background: var(--foreground); opacity: 0; transform: translate3d(-120px, -120px, 0); filter: blur(1px); transition: opacity 700ms ease; will-change: transform, opacity; }
+.cursor-label { z-index: 60; inset: auto; padding: 0.35rem 0.6rem; border-radius: 0.35rem; background: var(--foreground); color: var(--background); font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: -0.01em; box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 24%); white-space: nowrap; transform: translate3d(-120px, -120px, 0); transition: opacity 180ms ease, transform 180ms ease; will-change: transform; }
+.reveal-block { position: relative; }
+.reveal-tool-label, .reveal-status { position: absolute; z-index: 3; pointer-events: none; opacity: 0; font-family: var(--font-meta); font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.reveal-tool-label { top: -0.7rem; left: -0.5rem; padding: 0.2rem 0.35rem; background: #a68cff; color: #000; }
+.reveal-status { right: 0.25rem; top: -0.7rem; color: #a68cff; }
+.reveal-active { outline: 1px solid rgb(166 140 255 / 70%); outline-offset: 0.5rem; animation: reveal-clean 900ms ease forwards; }
+.reveal-active .reveal-tool-label, .reveal-active .reveal-status { animation: reveal-label 950ms ease forwards; }
+@keyframes reveal-clean { 0%, 55% { outline-color: rgb(166 140 255 / 70%); } 100% { outline-color: transparent; } }
+@keyframes reveal-label { 0%, 60% { opacity: 1; } 100% { opacity: 0; } }
+.reveal-complete .reveal-tool-label, .reveal-complete .reveal-status { visibility: hidden; }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .cursor-glow, .cursor-trail, .cursor-label, .reveal-tool-label, .reveal-status { display: none; } .reveal-active { outline: none; animation: none; } }

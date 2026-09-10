@@ -5,12 +5,13 @@ import { useEffect, useRef, useState } from 'react'
 const trailLength = 12
 
 export function CursorEffects() {
-  const cursorRef = useRef<HTMLDivElement>(null)
+  const labelRef = useRef<HTMLDivElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
   const trailRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const pointer = useRef({ x: -100, y: -100 })
-  const target = useRef({ x: -100, y: -100 })
-  const labelTarget = useRef('Deniel')
-  const [label, setLabel] = useState('Deniel')
+  const pointer = useRef({ x: -120, y: -120 })
+  const target = useRef({ x: -120, y: -120 })
+  const labelTarget = useRef('You')
+  const [label, setLabel] = useState('You')
 
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -20,7 +21,7 @@ export function CursorEffects() {
     const onMove = (event: PointerEvent) => {
       target.current = { x: event.clientX, y: event.clientY }
       const interactive = (event.target as HTMLElement).closest('a, button, [role="button"]')
-      const nextLabel = interactive?.getAttribute('data-cursor-label') || (interactive ? 'View' : 'Deniel')
+      const nextLabel = interactive?.getAttribute('data-cursor-label') || (interactive ? 'View' : 'You')
       if (nextLabel !== labelTarget.current) {
         labelTarget.current = nextLabel
         setLabel(nextLabel)
@@ -28,25 +29,24 @@ export function CursorEffects() {
     }
 
     const onLeave = () => {
-      target.current = { x: -100, y: -100 }
-      labelTarget.current = 'Deniel'
-      setLabel('Deniel')
+      target.current = { x: -120, y: -120 }
+      labelTarget.current = 'You'
+      setLabel('You')
     }
 
     window.addEventListener('pointermove', onMove, { passive: true })
     document.documentElement.addEventListener('mouseleave', onLeave)
     let frame = 0
     const animate = () => {
-      pointer.current.x += (target.current.x - pointer.current.x) * 0.2
-      pointer.current.y += (target.current.y - pointer.current.y) * 0.2
+      pointer.current.x += (target.current.x - pointer.current.x) * 0.18
+      pointer.current.y += (target.current.y - pointer.current.y) * 0.18
       const { x, y } = pointer.current
-      if (cursorRef.current) cursorRef.current.style.transform = `translate3d(${x + 12}px, ${y + 12}px, 0)`
+      if (labelRef.current) labelRef.current.style.transform = `translate3d(${x + 14}px, ${y + 16}px, 0)`
+      if (glowRef.current) glowRef.current.style.transform = `translate3d(${x - 12}vw, ${y - 12}vh, 0)`
       trailRefs.current.forEach((dot, index) => {
         if (!dot) return
-        const delay = (index + 1) * 0.12
-        dot.style.transform = `translate3d(${x - index * 3}px, ${y - index * 3}px, 0)`
-        dot.style.opacity = `${Math.max(0, 0.18 - index * 0.014)}`
-        dot.style.transitionDelay = `${delay}s`
+        dot.style.transform = `translate3d(${x - index * 4}px, ${y - index * 4}px, 0)`
+        dot.style.opacity = `${Math.max(0, 0.16 - index * 0.012)}`
       })
       frame = window.requestAnimationFrame(animate)
     }
@@ -59,7 +59,10 @@ export function CursorEffects() {
   }, [])
 
   return <>
-    <div className="cursor-trail" aria-hidden="true">{Array.from({ length: trailLength }, (_, index) => <span key={index} ref={(node) => { trailRefs.current[index] = node }} />)}</div>
-    <div ref={cursorRef} className="cursor-label" aria-hidden="true"><span className="cursor-arrow" />{label}</div>
+    <div ref={glowRef} className="cursor-glow" aria-hidden="true" />
+    <div className="cursor-trail" aria-hidden="true">
+      {Array.from({ length: trailLength }, (_, index) => <span key={index} ref={(node) => { trailRefs.current[index] = node }} />)}
+    </div>
+    <div ref={labelRef} className="cursor-label" aria-hidden="true">{label}</div>
   </>
 }
