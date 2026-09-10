@@ -2,7 +2,7 @@
 
 import { Canvas, type ThreeEvent } from '@react-three/fiber'
 import { ContactShadows, Environment, Float, Html, OrbitControls } from '@react-three/drei'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type DeskItem = 'coffee' | 'sketchbook' | 'polaroids'
 
@@ -61,14 +61,21 @@ function DeskScene({ active, setActive }: { active: DeskItem | null; setActive: 
 
 export function DeskCanvas() {
   const [active, setActive] = useState<DeskItem | null>(null)
+  const [isCompact, setIsCompact] = useState(false)
   const item = active ? itemCopy[active] : null
-  return <div className="desk-canvas-shell">
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 640px), (prefers-reduced-motion: reduce)')
+    const update = () => setIsCompact(media.matches)
+    update()
+    media.addEventListener('change', update)
+    return () => media.removeEventListener('change', update)
+  }, [])
+
+  return <div className={`desk-canvas-shell${isCompact ? ' desk-canvas-compact' : ''}`}>
     <div className="desk-canvas-header"><span>Interactive desk</span><span>Drag to look / click an object</span></div>
     <div className="desk-canvas-frame">
-      <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 4.9, 6.7], fov: 38 }}>
-        <color attach="background" args={['#121212']} />
-        <DeskScene active={active} setActive={setActive} />
-      </Canvas>
+      {isCompact ? <div className="desk-mobile-index" aria-label="Desk objects">{(Object.keys(itemCopy) as DeskItem[]).map((key) => <button key={key} type="button" onClick={() => setActive(key)}><span>{itemCopy[key].label}</span><strong>{key}</strong><span>↗</span></button>)}</div> : <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 4.9, 6.7], fov: 38 }}><color attach="background" args={['#121212']} /><DeskScene active={active} setActive={setActive} /></Canvas>}
       {item && <div className="desk-caption" role="dialog" aria-live="polite"><button type="button" className="desk-close" onClick={() => setActive(null)} aria-label="Close item details">×</button><span className="desk-caption-label">{item.label}</span><h3>{item.title}</h3><p>{item.text}</p><a href={item.href}>Explore the work <span>↗</span></a></div>}
     </div>
   </div>

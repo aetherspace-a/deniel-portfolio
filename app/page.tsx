@@ -17,9 +17,9 @@ const tools = [
 ]
 
 const projects = [
-  { title: 'Asiana-PTFS-Website', description: 'The official Asiana Airlines PTFS site.', href: 'https://github.com/aetherspace-a/Asiana-PTFS-Website' },
-  { title: 'AsianaPTFS-VAMS', description: 'A Discord bot and dashboard for virtual airline operations.', href: 'https://github.com/aetherspace-a/AsianaPTFS-VAMS' },
-  { title: 'mytimeisaether', description: 'A personal in-bio site for the work between projects.', href: 'https://github.com/aetherspace-a/mytimeisaether' },
+  { title: 'Asiana-PTFS-Website', description: 'The official Asiana Airlines PTFS site.', tag: 'Web / Community', href: 'https://github.com/aetherspace-a/Asiana-PTFS-Website' },
+  { title: 'AsianaPTFS-VAMS', description: 'A Discord bot and dashboard for virtual airline operations.', tag: 'Systems / Bot', href: 'https://github.com/aetherspace-a/AsianaPTFS-VAMS' },
+  { title: 'mytimeisaether', description: 'A personal in-bio site for the work between projects.', tag: 'Identity / Web', href: 'https://github.com/aetherspace-a/mytimeisaether' },
 ]
 
 const musicLinks = [
@@ -48,8 +48,7 @@ function LetterReveal({ children, className = '' }: { children: string; classNam
     return () => observer.disconnect()
   }, [])
 
-  const tokens = children.split(/(\s+)/)
-  return <span ref={ref} className={`letter-reveal ${className}`} aria-label={children}>{tokens.map((token, index) => <span key={`${token}-${index}`} aria-hidden="true" style={{ '--letter-index': index } as React.CSSProperties}>{token === ' ' ? '\u00a0' : token}</span>)}</span>
+  return <span ref={ref} className={`letter-reveal ${className}`}>{children}</span>
 }
 
 function LoadingScreen({ onComplete }: { onComplete: () => void }) {
@@ -164,7 +163,7 @@ export default function Page() {
 
       <section id="work" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
         <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>05 — Selected work</Meta></Reveal><Reveal delay={60}><Meta>Built in public</Meta></Reveal></div>
-        <div className="border-y border-border">{projects.map((project, index) => <Reveal key={project.title} delay={index * 70}><a href={project.href} target="_blank" rel="noreferrer" data-cursor-label="Open project" className="project-row group grid gap-5 border-b border-border py-8 last:border-0 sm:grid-cols-[1.2fr_1fr_2rem] sm:gap-8 sm:py-10 lg:grid-cols-[1.2fr_1fr_2rem] lg:gap-10"><div><h2 className="text-[1.7rem] font-medium leading-[0.95] tracking-[-0.055em] transition-colors group-hover:text-muted-foreground sm:text-4xl lg:text-5xl"><LetterReveal>{project.title}</LetterReveal></h2></div><p className="max-w-md self-end text-[0.95rem] leading-6 text-muted-foreground"><LetterReveal>{project.description}</LetterReveal></p><ArrowUpRight className="h-5 w-5 justify-self-end transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></Reveal>)}</div>
+        <div className="project-grid">{projects.map((project, index) => <Reveal key={project.title} delay={index * 70}><article className="project-card group"><div className="project-preview" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span><i /></div><div className="project-card-body"><Meta>{project.tag}</Meta><h2 className="text-[1.7rem] font-medium leading-[0.95] tracking-[-0.055em] transition-colors group-hover:text-muted-foreground sm:text-4xl"><LetterReveal>{project.title}</LetterReveal></h2><p className="max-w-md text-[0.95rem] leading-6 text-muted-foreground"><LetterReveal>{project.description}</LetterReveal></p><div className="project-actions"><a href={project.href} target="_blank" rel="noreferrer" data-cursor-label="View code" className="inline-flex items-center gap-2">View code <ArrowUpRight className="h-4 w-4" /></a><a href={project.href} target="_blank" rel="noreferrer" data-cursor-label="Open project" aria-label={`Open ${project.title}`} className="project-arrow"><ArrowUpRight className="h-5 w-5" /></a></div></div></article></Reveal>)}</div>
       </section>
 
       <section id="music" className="music-section content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>06 — Music</Meta></Reveal><Reveal delay={60}><Meta>lofi / zeopspace</Meta></Reveal></div><Reveal><div className="music-intro"><p className="music-statement"><LetterReveal>A quieter place to land.</LetterReveal></p><p className="music-note"><LetterReveal>I make lofi music as zeopspace — soft loops for late nights, long flights, and slow work.</LetterReveal></p></div></Reveal><div className="music-links">{musicLinks.map((link, index) => <Reveal key={link.name} delay={index * 70}><a href={link.href} target="_blank" rel="noreferrer" data-cursor-label="Listen" className="music-link group"><span className="music-icon"><img src={`https://cdn.simpleicons.org/${link.icon}/ffffff`} alt="" aria-hidden="true" /></span><span><strong>{link.name}</strong><small>{link.detail}</small></span><ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></Reveal>)}</div></section>
