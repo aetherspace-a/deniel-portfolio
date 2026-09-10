@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, Mail } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
+import { CursorEffects } from '@/components/cursor-effects'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -59,6 +60,7 @@ export default function Page() {
 
   return (
     <>
+      <CursorEffects />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       {showCookies && !isLoading && <CookieBanner onDismiss={() => setShowCookies(false)} />}
       <main id="top" className="overflow-hidden">

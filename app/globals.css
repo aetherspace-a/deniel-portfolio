@@ -113,3 +113,10 @@ body { @apply bg-background text-foreground font-sans antialiased; }
   .project-row { gap: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.cursor-trail, .cursor-label { position: fixed; inset: 0; pointer-events: none; }
+.cursor-trail { z-index: 5; overflow: hidden; }
+.cursor-trail span { position: absolute; left: 0; top: 0; width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--foreground); opacity: 0; transform: translate3d(-100px, -100px, 0); filter: blur(1px); transition: opacity 700ms ease; will-change: transform, opacity; }
+.cursor-label { z-index: 60; inset: auto; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.65rem 0.4rem 0.45rem; border-radius: 0.35rem; background: var(--foreground); color: var(--background); font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: -0.01em; box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 24%); white-space: nowrap; transform: translate3d(-100px, -100px, 0); will-change: transform; }
+.cursor-arrow { width: 0; height: 0; border-top: 0.3rem solid transparent; border-bottom: 0.3rem solid transparent; border-left: 0.45rem solid var(--background); transform: rotate(-35deg); }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .cursor-trail, .cursor-label { display: none; } }
