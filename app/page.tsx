@@ -136,7 +136,7 @@ export default function Page() {
       <ScrollProgress />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       {showCookies && !isLoading && <CookieBanner onDismiss={() => setShowCookies(false)} />}
-      <main id="top" className="portfolio-shell overflow-hidden">
+      <main id="top" className="portfolio-shell crency-mode overflow-hidden">
       <header className="site-header mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 sm:py-6 lg:px-12">
         <a href="#top" aria-label="Deniel John Prado home" data-magnetic className="logo">DJP<span>/</span></a>
         <nav aria-label="Primary navigation" className="flex items-center gap-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:gap-8">
@@ -147,12 +147,12 @@ export default function Page() {
       </header>
 
       <section className="hero mx-auto max-w-[1440px] px-5 pb-20 pt-14 sm:px-8 sm:pb-28 sm:pt-20 lg:px-12 lg:pb-40 lg:pt-28">
-        <Reveal><div className="hero-meta flex items-center justify-end border-y border-border py-3"><Meta>Philippines — 2026</Meta></div></Reveal>
+        <Reveal><div className="hero-meta flex items-center justify-between border-y border-border py-3"><Meta>Available for useful work</Meta><Meta>Philippines — 2026</Meta></div></Reveal>
         <div className="hero-copy">
           <Reveal delay={100}><VelocityHeading><h1 className="hero-title"><Parallax speed="slow"><LetterReveal className="block" >Deniel John</LetterReveal></Parallax> <Parallax speed="fast"><LetterReveal className="hero-prado" >Prado</LetterReveal></Parallax></h1></VelocityHeading></Reveal>
           <Reveal delay={180}><PremiumReveal delay={0.16}><p className="hero-subhead"><LetterReveal>A generalist working across community, documentation, design, and code.</LetterReveal></p></PremiumReveal></Reveal>
         </div>
-        <Reveal delay={240}><div className="hero-bridge"><Meta>01 / A way of working</Meta><p><LetterReveal>I help people find their way through complex work — coordinating communities, shaping documentation, and building useful software.</LetterReveal></p></div></Reveal>
+        <Reveal delay={240}><div className="hero-bridge"><Meta><span className="lime-sticker">01 / A way of working</span></Meta><p><LetterReveal>I help people find their way through complex work — coordinating communities, shaping documentation, and building useful software.</LetterReveal></p></div></Reveal>
       </section>
 
       <section id="about" className="content-section section-break mx-auto max-w-[1440px] border-t border-border px-5 py-24 sm:px-8 sm:py-32 lg:grid lg:grid-cols-[1fr_2fr] lg:gap-10 lg:px-12 lg:py-44">
