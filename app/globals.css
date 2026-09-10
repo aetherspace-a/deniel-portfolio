@@ -21,7 +21,7 @@
   --radius-lg: 0;
 }
 
-:root { color-scheme: dark; --background: #251126; --foreground: #f7f1e8; --card: #321634; --card-foreground: #f7f1e8; --muted: #3a1c3e; --muted-foreground: #d0b9d2; --border: #70446f; --accent: #c8ff35; --accent-foreground: #251126; --ring: #c8ff35; }
+:root { color-scheme: dark; --background: #251126; --foreground: #fff4fb; --card: #321634; --card-foreground: #fff4fb; --muted: #3a1c3e; --muted-foreground: #d9b8d0; --border: #77486f; --accent: #ff3fa4; --accent-foreground: #251126; --ring: #ff3fa4; }
 * { @apply border-border; }
 html { scroll-behavior: smooth; background: #000; }
 body { @apply bg-background text-foreground font-sans antialiased; }
@@ -222,21 +222,16 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .crency-mode .music-section .music-links, .crency-mode .music-section .music-link { border-color: var(--background); }
 .crency-mode .music-section .music-link:hover { background: rgb(37 17 38 / 8%); }
 .crency-mode .contact-title .word-reveal-word { background: var(--accent); color: var(--accent-foreground); }
-.brand-icon { display: inline-grid; place-items: center; width: 2.1rem; height: 2.1rem; flex: 0 0 auto; border: 1px solid currentColor; border-radius: 42% 58% 55% 45%; font-family: var(--font-display); font-size: .9rem; font-weight: 700; line-height: 1; transform: rotate(-5deg); box-shadow: .2rem .2rem 0 var(--accent); }
-.brand-icon span { transform: rotate(5deg); }
-.brand-icon-html5 { color: #251126; background: #ff7b35; }
-.brand-icon-javascript { color: #251126; background: #f5d547; }
-.brand-icon-python { color: #f7f1e8; background: #3976a8; }
-.brand-icon-discord { color: #f7f1e8; background: #5865f2; }
-.brand-icon-github { color: #251126; background: #f7f1e8; }
-.brand-icon-vercel { color: #f7f1e8; background: #251126; }
-.stack-item .brand-icon { width: 2rem; height: 2rem; margin-inline: .35rem .55rem; }
-.music-icon { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; flex: 0 0 auto; border: 2px solid var(--background); border-radius: 50%; font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; }
-.music-icon span { transform: rotate(-8deg); }
-.music-icon.brand-icon-spotify { background: #b6ec34; color: #251126; }
+.brand-icon { display: inline-grid; place-items: center; width: 2.35rem; height: 2.35rem; flex: 0 0 auto; border: 1px solid currentColor; border-radius: 42% 58% 55% 45%; color: var(--background); background: var(--accent); transform: rotate(-5deg); box-shadow: .2rem .2rem 0 var(--foreground); }
+.brand-mark { display: block; width: 1.45rem; height: 1.45rem; }
+.stack-item .brand-icon { width: 2.25rem; height: 2.25rem; margin-inline: .2rem .45rem; }
+.music-icon { width: 3.7rem; height: 3.7rem; border: 2px solid var(--background); border-radius: 50%; transform: rotate(-4deg); }
+.music-icon .brand-mark { width: 2rem; height: 2rem; }
+.music-icon.brand-icon-spotify { background: #1ed760; color: #07150c; }
 .music-icon.brand-icon-applemusic { background: #ff8ac8; color: #251126; }
-.music-icon.brand-icon-youtube { background: #ff654f; color: #251126; }
-.footer-brand-icon { display: inline-grid; place-items: center; width: 1.1rem; height: 1.1rem; border: 1px solid currentColor; border-radius: 50%; font-size: .62rem; font-weight: 800; }
+.music-icon.brand-icon-youtube { background: #ff4747; color: #251126; }
+.footer-brand-icon { width: 1.35rem; height: 1.35rem; border: 1px solid currentColor; border-radius: 50%; box-shadow: none; transform: none; }
+.footer-brand-icon .brand-mark { width: .8rem; height: .8rem; }
 .marquee-band { position: relative; z-index: 1; overflow: hidden; width: calc(100% + 2.5rem); margin: -1rem -1.25rem 3.5rem; padding: .55rem 0; border-block: 1px solid currentColor; font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.8rem); letter-spacing: -.04em; line-height: 1; white-space: nowrap; }
 .marquee-band > div { display: flex; width: max-content; }
 .marquee-band span { padding-right: 1.5rem; }
