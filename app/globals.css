@@ -166,3 +166,21 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .hero-title .hero-prado { display: block; margin-left: clamp(2rem, 12vw, 14rem); font-size: 0.7em; line-height: 0.9; font-style: italic; color: var(--muted-foreground); }
 .cursor-label { z-index: 60; inset: auto; padding: 0.35rem 0.6rem; border-radius: 0.2rem; background: #fff; color: #000; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: -0.01em; box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 24%); white-space: nowrap; transform: translate3d(-120px, -120px, 0); will-change: transform; transition: background-color 900ms ease, color 900ms ease; }
 @media (prefers-reduced-motion: reduce) { .portfolio-shell { transition: none; } .cursor-label { transition: none; } }
+
+.desk-intro { display: grid; gap: 1.5rem; margin-bottom: 3rem; max-width: 58rem; }
+.desk-statement { max-width: 52rem; font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 5.2rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
+.desk-note { max-width: 22rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.6; }
+.desk-canvas-shell { width: min(100%, 62rem); margin-inline: auto; }
+.desk-canvas-header { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--border); padding: 0.85rem 0; color: var(--muted-foreground); font-family: var(--font-meta); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.desk-canvas-frame { position: relative; height: clamp(28rem, 62vw, 42rem); overflow: hidden; border: 1px solid var(--border); background: #121212; }
+.desk-canvas-frame canvas { touch-action: none; }
+.desk-hotspot { display: block; border: 1px solid rgb(255 255 255 / 45%); background: rgb(0 0 0 / 65%); padding: 0.3rem 0.45rem; color: rgb(255 255 255 / 82%); font-family: var(--font-meta); font-size: 0.55rem; letter-spacing: 0.13em; text-transform: uppercase; opacity: 0.8; transition: opacity 180ms ease, background-color 180ms ease; user-select: none; }
+.desk-canvas-frame canvas:hover + .desk-caption { }
+.desk-caption { position: absolute; right: 1.25rem; bottom: 1.25rem; width: min(19rem, calc(100% - 2.5rem)); border: 1px solid rgb(255 255 255 / 22%); background: rgb(10 10 10 / 94%); padding: 1.25rem; color: var(--foreground); box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%); }
+.desk-close { position: absolute; top: 0.65rem; right: 0.75rem; color: var(--muted-foreground); font-size: 1.25rem; line-height: 1; transition: color 180ms ease; }
+.desk-close:hover { color: var(--foreground); }
+.desk-caption-label { color: var(--muted-foreground); font-family: var(--font-meta); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; }
+.desk-caption h3 { max-width: 14rem; margin-top: 0.8rem; font-family: var(--font-display); font-size: 1.8rem; font-weight: 500; line-height: 0.95; letter-spacing: -0.06em; }
+.desk-caption p { margin-top: 0.8rem; color: var(--muted-foreground); font-size: 0.85rem; line-height: 1.55; }
+.desk-caption a { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.1rem; border-bottom: 1px solid var(--foreground); padding-bottom: 0.25rem; font-family: var(--font-meta); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; }
+@media (max-width: 640px) { .desk-canvas-header { align-items: flex-start; flex-direction: column; gap: 0.3rem; } .desk-canvas-frame { height: 30rem; } .desk-caption { right: 0.75rem; bottom: 0.75rem; width: calc(100% - 1.5rem); } }

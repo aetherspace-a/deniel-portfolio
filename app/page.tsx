@@ -5,6 +5,7 @@ import { ArrowUpRight, Mail } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { CursorEffects } from '@/components/cursor-effects'
 import { LightTracing } from '@/components/light-tracing'
+import { DeskCanvas } from '@/components/desk-canvas'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -158,6 +159,8 @@ export default function Page() {
           {tools.map((tool, index) => <Reveal key={tool.name} delay={index * 45}><div className="stack-item group"><span className="stack-index">0{index + 1}</span><img src={`https://cdn.simpleicons.org/${tool.icon}/ffffff`} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-75 transition-opacity group-hover:opacity-100" /><span className="stack-name">{tool.name}</span><span className="stack-role">{index < 3 ? 'language' : index === 3 ? 'community' : 'platform'}</span></div></Reveal>)}
         </div>
       </section>
+
+      <section id="desk" className="content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Desk study</Meta></Reveal><Reveal delay={60}><Meta>A tactile index</Meta></Reveal></div><Reveal><div className="desk-intro"><p className="desk-statement"><LetterReveal>Pick up a thread. See where it leads.</LetterReveal></p><p className="desk-note"><LetterReveal>Three objects from the desk, each pointing to a different part of the work.</LetterReveal></p></div></Reveal><DeskCanvas /></section>
 
       <section id="work" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
         <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Selected work</Meta></Reveal><Reveal delay={60}><Meta>Built in public</Meta></Reveal></div>
