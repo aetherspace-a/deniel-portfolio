@@ -47,10 +47,11 @@ export default function Page() {
         <Reveal delay={100}><div className="section-content mt-12 lg:mt-0"><p className="section-statement">A jack of all trades, with a soft spot for the seams between them.</p><p className="section-body mt-10 max-w-xl">My work moves between community leadership, design, technical writing, and code. I am interested in the connective tissue: the language, systems, and small decisions that help good ideas become useful in the real world.</p></div></Reveal>
       </section>
 
-      <section id="stack" className="content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
-        <div className="section-heading mb-12 flex items-end justify-between gap-8"><Reveal><Meta>03 — Tools &amp; stack</Meta></Reveal><Reveal delay={60}><Meta>The things behind the work</Meta></Reveal></div>
-        <div className="grid grid-cols-2 border-y border-border sm:grid-cols-3 lg:grid-cols-6">
-          {tools.map((tool, index) => <Reveal key={tool.name} delay={index * 50}><div className="flex min-h-36 flex-col justify-between border-b border-border p-5 last:border-0 sm:min-h-40 sm:border-r sm:p-6 lg:border-b-0 lg:border-r lg:last:border-r-0"><img src={`https://cdn.simpleicons.org/${tool.icon}/ffffff`} alt="" aria-hidden="true" className="h-7 w-7 object-contain opacity-85" /><span className="text-sm tracking-[-0.02em]">{tool.name}</span></div></Reveal>)}
+      <section id="stack" className="content-section stack-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
+        <div className="section-heading mb-12 flex items-end justify-between gap-8"><Reveal><Meta>03 — Tools &amp; stack</Meta></Reveal><Reveal delay={60}><Meta>A working vocabulary</Meta></Reveal></div>
+        <Reveal><div className="stack-intro"><p className="stack-statement">The tools stay quiet. The work does the talking.</p><p className="stack-note">A practical stack for building clear paths through complicated things.</p></div></Reveal>
+        <div className="stack-list border-y border-border">
+          {tools.map((tool, index) => <Reveal key={tool.name} delay={index * 45}><div className="stack-item group"><span className="stack-index">0{index + 1}</span><img src={`https://cdn.simpleicons.org/${tool.icon}/ffffff`} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-75 transition-opacity group-hover:opacity-100" /><span className="stack-name">{tool.name}</span><span className="stack-role">{index < 3 ? 'language' : index === 3 ? 'community' : 'platform'}</span></div></Reveal>)}
         </div>
       </section>
 

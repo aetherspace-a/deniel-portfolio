@@ -30,6 +30,17 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .content-section { scroll-margin-top: 5rem; }
 .section-heading { min-height: 2rem; }
 .section-body { color: var(--muted-foreground); font-size: 1rem; line-height: 1.75; }
+.stack-intro { display: grid; gap: 1.5rem; margin-bottom: 3rem; max-width: 58rem; }
+.stack-statement { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 5.2rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
+.stack-note { max-width: 20rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.6; }
+.stack-list { max-width: 58rem; }
+.stack-item { display: grid; grid-template-columns: 2.5rem 1.5rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; min-height: 4.75rem; border-bottom: 1px solid var(--border); padding: 0 0.25rem; transition: background-color 180ms ease, padding 180ms ease; }
+.stack-item:last-child { border-bottom: 0; }
+.stack-item:hover { background: var(--muted); padding-inline: 1rem; }
+.stack-index, .stack-role { color: var(--muted-foreground); font-family: var(--font-meta); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.stack-name { font-size: clamp(1rem, 2vw, 1.25rem); letter-spacing: -0.03em; }
+.stack-role { text-align: right; }
+.project-row { transition: background-color 180ms ease, padding 180ms ease; }
 .project-row { transition: background-color 180ms ease, padding 180ms ease; }
 .project-row:hover { background: var(--muted); }
 
@@ -54,6 +65,10 @@ body { @apply bg-background text-foreground font-sans antialiased; }
   .hero-subhead { max-width: 17rem; margin-top: 2.5rem; font-size: 1.25rem; line-height: 1.18; }
   .hero-bridge { grid-template-columns: 1fr; gap: 1.25rem; margin-top: 5rem; }
   .hero-bridge p { max-width: 20rem; }
+  .stack-intro { margin-bottom: 2rem; }
+  .stack-item { grid-template-columns: 2rem 1.25rem minmax(0, 1fr); gap: 0.75rem; min-height: 4.25rem; }
+  .stack-role { display: none; }
+  .stack-item:hover { padding-inline: 0.5rem; }
   .project-row { gap: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
