@@ -6,6 +6,10 @@ import { Reveal } from '@/components/reveal'
 import { CursorEffects } from '@/components/cursor-effects'
 import { LightTracing } from '@/components/light-tracing'
 import { DeskCanvas } from '@/components/desk-canvas'
+import { AudioReactive } from '@/components/audio-reactive'
+import { CommandPalette } from '@/components/command-palette'
+import { WorkAssistant } from '@/components/work-assistant'
+import { PremiumReveal } from '@/components/premium-motion'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -119,9 +123,13 @@ function WordRevealTitle() {
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true)
   const [showCookies, setShowCookies] = useState(true)
+  const [assistantOpen, setAssistantOpen] = useState(false)
 
   return (
     <>
+      <AudioReactive />
+      <CommandPalette onAssistant={() => setAssistantOpen(true)} />
+      <WorkAssistant open={assistantOpen} onClose={() => setAssistantOpen(false)} />
       <LightTracing />
       <CursorEffects />
       <ScrollProgress />
@@ -141,7 +149,7 @@ export default function Page() {
         <Reveal><div className="hero-meta flex items-center justify-end border-y border-border py-3"><Meta>Philippines — 2026</Meta></div></Reveal>
         <div className="hero-copy">
           <Reveal delay={100}><h1 className="hero-title"><LetterReveal className="block" >Deniel John</LetterReveal> <LetterReveal className="hero-prado" >Prado</LetterReveal></h1></Reveal>
-          <Reveal delay={180}><p className="hero-subhead"><LetterReveal>A generalist working across community, documentation, design, and code.</LetterReveal></p></Reveal>
+          <Reveal delay={180}><PremiumReveal delay={0.16}><p className="hero-subhead"><LetterReveal>A generalist working across community, documentation, design, and code.</LetterReveal></p></PremiumReveal></Reveal>
         </div>
         <Reveal delay={240}><div className="hero-bridge"><Meta>01 / A way of working</Meta><p><LetterReveal>I help people find their way through complex work — coordinating communities, shaping documentation, and building useful software.</LetterReveal></p></div></Reveal>
       </section>
