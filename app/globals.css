@@ -29,7 +29,10 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .site-header a { transition: color 180ms ease; }
 .content-section { scroll-margin-top: 5rem; }
 .section-heading { min-height: 2rem; }
-.section-body { color: var(--muted-foreground); font-size: 1rem; line-height: 1.75; }
+.section-body { color: var(--muted-foreground); font-size: clamp(0.95rem, 1.5vw, 1.08rem); line-height: 1.75; }
+.section-content, .stack-intro, .music-intro { min-width: 0; }
+.project-row p { color: var(--muted-foreground); }
+@media (min-width: 1024px) { .hero, .content-section, #work, #contact, footer { padding-left: clamp(3rem, 6vw, 6rem); padding-right: clamp(3rem, 6vw, 6rem); } }
 .stack-intro { display: grid; gap: 1.5rem; margin-bottom: 3rem; max-width: 58rem; }
 .stack-statement { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 5.2rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
 .stack-note { max-width: 20rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.6; }
@@ -60,7 +63,9 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .logo { font-family: var(--font-body); font-size: 0.875rem; font-weight: 700; letter-spacing: -0.08em; }
 .logo span { color: var(--muted-foreground); margin-left: 0.15rem; }
 .hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 22rem); align-items: end; gap: 2rem; padding-top: clamp(4rem, 10vw, 9rem); }
-.hero-title, .contact-title { font-family: var(--font-display); font-weight: 500; font-size: clamp(4.1rem, 12.5vw, 12rem); letter-spacing: -0.08em; line-height: 0.82; }\n.hero-title span { display: block; font-weight: 600; }\n.hero-title em { display: block; margin-left: clamp(2rem, 12vw, 14rem); font-size: 0.7em; line-height: 0.9; }
+ .hero-title, .contact-title { font-family: var(--font-display); font-weight: 500; font-size: clamp(4.1rem, 12.5vw, 12rem); letter-spacing: -0.08em; line-height: 0.82; }
+.hero-title span { display: block; font-weight: 600; }
+.hero-title em { display: block; margin-left: clamp(2rem, 12vw, 14rem); font-size: 0.7em; line-height: 0.9; }
 .hero-title em, .contact-title em { font-style: italic; color: var(--muted-foreground); }
 .hero-subhead { width: min(100%, 19rem); justify-self: end; padding-bottom: 0.35rem; font-size: clamp(1.15rem, 2vw, 1.55rem); line-height: 1.15; letter-spacing: -0.04em; }
 .hero-bridge { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 2fr); gap: 2rem; margin-top: clamp(4rem, 9vw, 8rem); border-top: 1px solid var(--border); padding-top: 1.25rem; }
@@ -89,12 +94,15 @@ body { @apply bg-background text-foreground font-sans antialiased; }
   }
 }
 @media (max-width: 640px) {
-  .cookie-banner { right: 0.75rem; bottom: 0.75rem; width: calc(100% - 1.5rem); gap: 1.25rem; padding: 1.25rem; }
+  .hero-subhead, .hero-bridge p, .section-body, .music-note, .stack-note, .project-row p { max-width: 100%; overflow-wrap: anywhere; }
+  .cookie-banner { right: 0.75rem; bottom: 0.75rem; width: calc(100% - 1.5rem); gap: 1rem; padding: 1.1rem; }
   .cookie-banner p { font-size: 0.85rem; }
   .cookie-banner button { align-self: end; min-width: 5rem; }
 }
 @media (max-width: 640px) {
-  .site-header { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+  .site-header { padding-top: 1rem; padding-bottom: 1rem; }
+  .site-header nav { gap: 0.85rem; font-size: 0.58rem; }
+  .site-header .logo { font-size: 0.8rem; }
   .hero { padding-top: 2rem; }
   .hero-meta { align-items: flex-start; gap: 1rem; }
   .hero-meta span:last-child { text-align: right; }
@@ -124,10 +132,10 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .cursor-trail span { position: absolute; left: 0; top: 0; width: 0.45rem; height: 0.45rem; border-radius: 999px; background: #fff; opacity: 0; transform: translate3d(-120px, -120px, 0); filter: blur(1px); transition: opacity 700ms ease; will-change: transform, opacity; }
 .cursor-label { z-index: 60; inset: auto; padding: 0.35rem 0.6rem; border-radius: 0.2rem; background: var(--foreground); color: var(--background); font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: -0.01em; box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 24%); white-space: nowrap; transform: translate3d(-120px, -120px, 0); will-change: transform; }
 .reveal-block { position: relative; }
-.reveal-tool-label, .reveal-status { position: absolute; z-index: 3; pointer-events: none; opacity: 0; font-family: var(--font-meta); font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.reveal-tool-label, .reveal-status { display: none; }
 .reveal-tool-label { top: -0.7rem; left: -0.5rem; padding: 0.2rem 0.35rem; background: #a68cff; color: #000; }
 .reveal-status { right: 0.25rem; top: -0.7rem; color: #a68cff; }
-.reveal-active { outline: 1px solid rgb(166 140 255 / 70%); outline-offset: 0.5rem; animation: reveal-clean 900ms ease forwards; }
+.reveal-active { outline: none; animation: none; }
 .reveal-active .reveal-tool-label, .reveal-active .reveal-status { animation: reveal-label 950ms ease forwards; }
 @keyframes reveal-clean { 0%, 55% { outline-color: rgb(166 140 255 / 70%); } 100% { outline-color: transparent; } }
 @keyframes reveal-label { 0%, 60% { opacity: 1; } 100% { opacity: 0; } }
@@ -142,7 +150,7 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .word-reveal-italic { font-style: italic; }
 .word-reveal-active .word-reveal-word { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
 .letter-reveal { display: inline; }
-.letter-reveal > span { display: inline; opacity: 1; transform: none; clip-path: none; transition: none; }
+.letter-reveal > span { display: inline-block; white-space: nowrap; opacity: 1; transform: none; clip-path: none; transition: none; }
 .letter-reveal-active > span { opacity: 1; transform: none; clip-path: none; }
 .hero-title .hero-prado { display: block; margin-left: clamp(2rem, 12vw, 14rem); font-size: 0.7em; line-height: 0.9; font-style: italic; color: var(--muted-foreground); }
 .cursor-label { z-index: 60; inset: auto; padding: 0.35rem 0.6rem; border-radius: 0.2rem; background: #fff; color: #000; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: -0.01em; box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 24%); white-space: nowrap; transform: translate3d(-120px, -120px, 0); will-change: transform; transition: background-color 900ms ease, color 900ms ease; }

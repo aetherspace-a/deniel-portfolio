@@ -46,7 +46,8 @@ function LetterReveal({ children, className = '' }: { children: string; classNam
     return () => observer.disconnect()
   }, [])
 
-  return <span ref={ref} className={`letter-reveal ${className}`} aria-label={children}>{[...children].map((character, index) => <span key={`${character}-${index}`} aria-hidden="true" style={{ '--letter-index': index } as React.CSSProperties}>{character === ' ' ? '\u00a0' : character}</span>)}</span>
+  const tokens = children.split(/(\s+)/)
+  return <span ref={ref} className={`letter-reveal ${className}`} aria-label={children}>{tokens.map((token, index) => <span key={`${token}-${index}`} aria-hidden="true" style={{ '--letter-index': index } as React.CSSProperties}>{token === ' ' ? '\u00a0' : token}</span>)}</span>
 }
 
 function LoadingScreen({ onComplete }: { onComplete: () => void }) {
