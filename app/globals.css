@@ -222,6 +222,27 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .crency-mode .music-section .music-links, .crency-mode .music-section .music-link { border-color: var(--background); }
 .crency-mode .music-section .music-link:hover { background: rgb(37 17 38 / 8%); }
 .crency-mode .contact-title .word-reveal-word { background: var(--accent); color: var(--accent-foreground); }
+.brand-icon { display: inline-grid; place-items: center; width: 2.1rem; height: 2.1rem; flex: 0 0 auto; border: 1px solid currentColor; border-radius: 42% 58% 55% 45%; font-family: var(--font-display); font-size: .9rem; font-weight: 700; line-height: 1; transform: rotate(-5deg); box-shadow: .2rem .2rem 0 var(--accent); }
+.brand-icon span { transform: rotate(5deg); }
+.brand-icon-html5 { color: #251126; background: #ff7b35; }
+.brand-icon-javascript { color: #251126; background: #f5d547; }
+.brand-icon-python { color: #f7f1e8; background: #3976a8; }
+.brand-icon-discord { color: #f7f1e8; background: #5865f2; }
+.brand-icon-github { color: #251126; background: #f7f1e8; }
+.brand-icon-vercel { color: #f7f1e8; background: #251126; }
+.stack-item .brand-icon { width: 2rem; height: 2rem; margin-inline: .35rem .55rem; }
+.music-icon { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; flex: 0 0 auto; border: 2px solid var(--background); border-radius: 50%; font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; }
+.music-icon span { transform: rotate(-8deg); }
+.music-icon.brand-icon-spotify { background: #b6ec34; color: #251126; }
+.music-icon.brand-icon-applemusic { background: #ff8ac8; color: #251126; }
+.music-icon.brand-icon-youtube { background: #ff654f; color: #251126; }
+.footer-brand-icon { display: inline-grid; place-items: center; width: 1.1rem; height: 1.1rem; border: 1px solid currentColor; border-radius: 50%; font-size: .62rem; font-weight: 800; }
+.project-card { transform-origin: center bottom; }
+.project-card:hover { animation: card-wiggle .65s cubic-bezier(.22,1,.36,1) both; }
+@keyframes card-wiggle { 0% { rotate: 0deg; } 35% { rotate: -1.5deg; } 70% { rotate: 1deg; } 100% { rotate: 0deg; } }
+.music-link:hover .music-icon, .stack-item:hover .brand-icon { animation: icon-bounce .55s cubic-bezier(.22,1,.36,1); }
+@keyframes icon-bounce { 45% { scale: 1.14; rotate: 8deg; } 100% { scale: 1; rotate: 0deg; } }
+@media (prefers-reduced-motion: reduce) { .project-card:hover, .music-link:hover .music-icon, .stack-item:hover .brand-icon { animation: none; } }
 .crency-mode .desk-section::before, .crency-mode .desk-section::after { border-color: var(--accent); }
 @media (max-width: 640px) { .crency-mode .hero { min-height: auto; } .crency-mode .hero-copy { display: block; } .crency-mode .hero-title { font-size: clamp(4.2rem, 20vw, 7rem); } .crency-mode .hero-subhead { max-width: 15rem; margin-top: 2.5rem; } .crency-mode .project-card:nth-child(2), .crency-mode .project-card:nth-child(3) { transform: none; } .crency-mode .project-card + .project-card { margin-top: 1rem; } }
 @media (prefers-reduced-motion: reduce) { .crency-mode .project-card:nth-child(2), .crency-mode .project-card:nth-child(3), .crency-mode .hero-subhead, .lime-sticker { transform: none; } }
