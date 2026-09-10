@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Mail } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { CursorEffects } from '@/components/cursor-effects'
+import { LightTracing } from '@/components/light-tracing'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -121,6 +122,7 @@ export default function Page() {
 
   return (
     <>
+      <LightTracing />
       <CursorEffects />
       <ScrollProgress />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
