@@ -25,7 +25,14 @@
 * { @apply border-border; }
 html { scroll-behavior: smooth; background: #000; }
 body { @apply bg-background text-foreground font-sans antialiased; }
-.site-header { position: sticky; top: 0; z-index: 20; background: var(--background); }
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--background); border-bottom: 1px solid transparent; }
+.site-header a { transition: color 180ms ease; }
+.content-section { scroll-margin-top: 5rem; }
+.section-heading { min-height: 2rem; }
+.section-body { color: var(--muted-foreground); font-size: 1rem; line-height: 1.75; }
+.project-row { transition: background-color 180ms ease, padding 180ms ease; }
+.project-row:hover { background: var(--muted); }
+
 ::selection { background: #fff; color: #000; }
 .logo { font-family: var(--font-body); font-size: 0.875rem; font-weight: 700; letter-spacing: -0.08em; }
 .logo span { color: var(--muted-foreground); margin-left: 0.15rem; }

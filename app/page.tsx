@@ -42,13 +42,13 @@ export default function Page() {
         <Reveal delay={240}><div className="hero-bridge"><Meta>01 / A way of working</Meta><p>I help people find their way through complex work — coordinating communities, shaping documentation, and building useful software.</p></div></Reveal>
       </section>
 
-      <section id="about" className="section-break mx-auto max-w-[1440px] border-t border-border px-5 py-24 sm:px-8 sm:py-32 lg:grid lg:grid-cols-[1fr_2fr] lg:gap-10 lg:px-12 lg:py-44">
+      <section id="about" className="content-section section-break mx-auto max-w-[1440px] border-t border-border px-5 py-24 sm:px-8 sm:py-32 lg:grid lg:grid-cols-[1fr_2fr] lg:gap-10 lg:px-12 lg:py-44">
         <Reveal><Meta>02 — About</Meta></Reveal>
-        <Reveal delay={100}><div className="mt-12 lg:mt-0"><p className="section-statement">A jack of all trades, with a soft spot for the seams between them.</p><p className="mt-10 max-w-xl text-[1rem] leading-7 text-muted-foreground">My work moves between community leadership, design, technical writing, and code. I am interested in the connective tissue: the language, systems, and small decisions that help good ideas become useful in the real world.</p></div></Reveal>
+        <Reveal delay={100}><div className="section-content mt-12 lg:mt-0"><p className="section-statement">A jack of all trades, with a soft spot for the seams between them.</p><p className="section-body mt-10 max-w-xl">My work moves between community leadership, design, technical writing, and code. I am interested in the connective tissue: the language, systems, and small decisions that help good ideas become useful in the real world.</p></div></Reveal>
       </section>
 
-      <section id="stack" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
-        <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>03 — Tools &amp; stack</Meta></Reveal><Reveal delay={60}><Meta>The things behind the work</Meta></Reveal></div>
+      <section id="stack" className="content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
+        <div className="section-heading mb-12 flex items-end justify-between gap-8"><Reveal><Meta>03 — Tools &amp; stack</Meta></Reveal><Reveal delay={60}><Meta>The things behind the work</Meta></Reveal></div>
         <div className="grid grid-cols-2 border-y border-border sm:grid-cols-3 lg:grid-cols-6">
           {tools.map((tool, index) => <Reveal key={tool.name} delay={index * 50}><div className="flex min-h-36 flex-col justify-between border-b border-border p-5 last:border-0 sm:min-h-40 sm:border-r sm:p-6 lg:border-b-0 lg:border-r lg:last:border-r-0"><img src={`https://cdn.simpleicons.org/${tool.icon}/ffffff`} alt="" aria-hidden="true" className="h-7 w-7 object-contain opacity-85" /><span className="text-sm tracking-[-0.02em]">{tool.name}</span></div></Reveal>)}
         </div>
