@@ -12,6 +12,7 @@ import { WorkAssistant } from '@/components/work-assistant'
 import { PremiumReveal } from '@/components/premium-motion'
 import { MotionIn, Parallax, VelocityHeading } from '@/components/parallax-motion'
 import { MarqueeBand, OrbitPath, PlayfulFloat, PlayfulReveal, SpiralScroll } from '@/components/playful-motion'
+import { WholeSiteMotion } from '@/components/whole-site-motion'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -54,7 +55,7 @@ function LetterReveal({ children, className = '' }: { children: string; classNam
     return () => observer.disconnect()
   }, [])
 
-  return <span ref={ref} className={`letter-reveal ${className}`}>{children}</span>
+  return <span ref={ref} className={`letter-reveal ${className}`}>{[...children].map((character, index) => <span key={`${character}-${index}`} style={{ '--letter-index': index } as React.CSSProperties}>{character === ' ' ? '\u00a0' : character}</span>)}</span>
 }
 
 function LoadingScreen({ onComplete }: { onComplete: () => void }) {
@@ -137,7 +138,7 @@ export default function Page() {
       <ScrollProgress />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       {showCookies && !isLoading && <CookieBanner onDismiss={() => setShowCookies(false)} />}
-      <main id="top" className="portfolio-shell crency-mode overflow-hidden">
+      <WholeSiteMotion><main id="top" className="portfolio-shell crency-mode overflow-hidden">
       <header className="site-header mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 sm:py-6 lg:px-12">
         <a href="#top" aria-label="Deniel John Prado home" data-magnetic className="logo">DJP<span>/</span></a>
         <nav aria-label="Primary navigation" className="flex items-center gap-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:gap-8">
@@ -181,7 +182,7 @@ export default function Page() {
       <section id="contact" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><Reveal><Meta>07 — Contact</Meta></Reveal><div className="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-[1fr_2fr] lg:items-end"><Reveal delay={100}><WordRevealTitle /></Reveal><PlayfulReveal delay={0.12}><div className="lg:justify-self-end"><p className="mb-8 max-w-sm text-[1rem] leading-7 text-muted-foreground">Have a question, a half-formed idea, or a problem that needs a few different kinds of thinking?</p><a href="mailto:hello@deniel.lol" data-cursor-label="Say hello" className="group inline-flex items-center gap-3 border-b border-foreground pb-3 text-sm transition-colors hover:text-muted-foreground">hello@deniel.lol <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></div></PlayfulReveal></div></section>
 
       <footer className="mx-auto flex max-w-[1440px] flex-col gap-5 border-t border-border px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"><Meta>© 2026 Deniel John Prado</Meta><div className="flex gap-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"><a href="mailto:hello@deniel.lol" className="inline-flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> Email</a><a href="https://github.com/aetherspace-a" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><span className="footer-brand-icon" aria-hidden="true">G</span> GitHub</a><a href="https://linkedin.com" className="hover:text-foreground">LinkedIn</a></div><Meta>Built with intention</Meta></footer>
-    </main>
+    </main></WholeSiteMotion>
     </>
   )
 }
