@@ -92,7 +92,11 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .hero-subhead { width: min(100%, 19rem); justify-self: end; padding-bottom: 0.35rem; font-size: clamp(1.15rem, 2vw, 1.55rem); line-height: 1.15; letter-spacing: -0.04em; }
 .hero-bridge { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 2fr); gap: 2rem; margin-top: clamp(4rem, 9vw, 8rem); border-top: 1px solid var(--border); padding-top: 1.25rem; }
 .hero-bridge p { max-width: 34rem; font-size: 1rem; line-height: 1.6; color: var(--muted-foreground); }
-.section-statement { max-width: 52rem; font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 5.6rem); font-weight: 500; line-height: 0.98; letter-spacing: calc(-0.07em + var(--scroll-spacing, 0em)); transform: skewY(var(--scroll-skew, 0deg)); transition: letter-spacing 280ms ease, transform 280ms ease; }
+.section-statement { max-width: 52rem; font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 5.6rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
+.portfolio-shell > section { opacity: .58; transform: translateY(2.25rem); transition: opacity 900ms cubic-bezier(.22,1,.36,1), transform 900ms cubic-bezier(.22,1,.36,1); }
+.portfolio-shell > section.scroll-active { opacity: 1; transform: translateY(0); }
+.hero { opacity: 1 !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) { .portfolio-shell > section { opacity: 1; transform: none; transition: none; } }
 .contact-title { font-size: clamp(3.8rem, 10vw, 10rem); }
 .loading-screen { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--background); padding: 1.25rem; animation: loading-exit 420ms ease 3.15s forwards; }
 .loading-state { display: grid; justify-items: center; width: min(100%, 34rem); gap: 1.25rem; text-align: center; }
@@ -172,8 +176,6 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .portfolio-shell { position: relative; z-index: 1; min-height: 100vh; background: transparent; color: var(--foreground); }
 .content-section, #work, #contact { position: relative; isolation: isolate; }
 .content-section::before, #work::before, #contact::before { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent, rgb(255 255 255 / 0.018) 50%, transparent); content: ''; pointer-events: none; }
-.particle-ecosystem { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100vh; pointer-events: none; opacity: .14; mix-blend-mode: screen; filter: blur(.35px); }
-@media (max-width: 640px), (prefers-reduced-motion: reduce) { .particle-ecosystem { display: none; } }
 .light-tracing { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100vh; pointer-events: none; opacity: 0.52; mix-blend-mode: screen; transition: opacity 800ms ease; }
 .scroll-progress { position: fixed; top: 0; left: 0; z-index: 70; width: var(--scroll-progress, 0%); height: 2px; background: var(--foreground); transform-origin: left; transition: width 120ms linear; pointer-events: none; }
 .project-row, .music-link, .stack-item { position: relative; overflow: hidden; }

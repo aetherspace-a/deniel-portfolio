@@ -10,7 +10,6 @@ import { AudioReactive } from '@/components/audio-reactive'
 import { CommandPalette } from '@/components/command-palette'
 import { WorkAssistant } from '@/components/work-assistant'
 import { PremiumReveal } from '@/components/premium-motion'
-import { ParticleEcosystem } from '@/components/particle-ecosystem'
 
 const tools = [
   { name: 'HTML', icon: 'html5' },
@@ -127,23 +126,16 @@ export default function Page() {
   const [assistantOpen, setAssistantOpen] = useState(false)
 
   useEffect(() => {
-    let lastY = window.scrollY
-    let frame = 0
-    const update = () => {
-      const velocity = Math.max(-1, Math.min(1, (window.scrollY - lastY) / 80))
-      document.documentElement.style.setProperty('--scroll-skew', `${velocity * -0.35}deg`)
-      document.documentElement.style.setProperty('--scroll-spacing', `${Math.abs(velocity) * 0.012}em`)
-      lastY = window.scrollY
-      frame = 0
-    }
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update) }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => { window.removeEventListener('scroll', onScroll); if (frame) cancelAnimationFrame(frame) }
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.portfolio-shell > section'))
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.target.classList.toggle('scroll-active', entry.isIntersecting))
+    }, { threshold: 0.18, rootMargin: '-8% 0px -8% 0px' })
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
   return (
     <>
-      <ParticleEcosystem />
       <AudioReactive />
       <CommandPalette onAssistant={() => setAssistantOpen(true)} />
       <WorkAssistant open={assistantOpen} onClose={() => setAssistantOpen(false)} />
