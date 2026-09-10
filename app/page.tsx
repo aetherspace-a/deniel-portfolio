@@ -70,7 +70,8 @@ function LetterReveal({ children, className = '' }: { children: string; classNam
     return () => observer.disconnect()
   }, [])
 
-  return <span ref={ref} className={`letter-reveal ${className}`}>{[...children].map((character, index) => <span key={`${character}-${index}`} style={{ '--letter-index': index } as React.CSSProperties}>{character === ' ' ? '\u00a0' : character}</span>)}</span>
+  let letterIndex = 0
+  return <span ref={ref} className={`letter-reveal ${className}`}>{children.split(/(\s+)/).map((word, wordIndex) => word.trim() ? <span className="letter-word" key={`${word}-${wordIndex}`}>{[...word].map((character) => { const index = letterIndex++; return <span key={`${character}-${index}`} style={{ '--letter-index': index } as React.CSSProperties}>{character}</span> })}</span> : <span className="letter-space" key={`${word}-${wordIndex}`}>{word}</span>)}</span>
 }
 
 function LoadingScreen({ onComplete }: { onComplete: () => void }) {
