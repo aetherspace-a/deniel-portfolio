@@ -47,13 +47,14 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .music-statement { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 5.2rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
 .music-note { max-width: 22rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.6; }
 .music-links { max-width: 58rem; border-top: 1px solid var(--border); }
-.music-link { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; min-height: 5.5rem; border-bottom: 1px solid var(--border); transition: background-color 180ms ease, padding 180ms ease; }
+.music-link { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; min-height: 4.75rem; border-bottom: 1px solid var(--border); padding: 0 0.25rem; transition: background-color 180ms ease, padding 180ms ease; }
 .music-link:hover { background: var(--muted); padding-inline: 1rem; }
-.music-icon { display: grid; place-items: center; height: 2.25rem; width: 2.25rem; border: 1px solid var(--border); }
-.music-icon img { height: 1rem; width: 1rem; object-fit: contain; }
+.music-icon { display: grid; place-items: center; height: 1.5rem; width: 1.5rem; }
+.music-icon img { height: 1.25rem; width: 1.25rem; object-fit: contain; opacity: 0.75; transition: opacity 180ms ease; }
+.music-link:hover .music-icon img { opacity: 1; }
 .music-link strong, .music-link small { display: block; }
-.music-link strong { font-size: 1.1rem; font-weight: 500; letter-spacing: -0.03em; }
-.music-link small { margin-top: 0.25rem; color: var(--muted-foreground); font-size: 0.75rem; }
+.music-link strong { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 500; letter-spacing: -0.03em; }
+.music-link small { margin-top: 0.25rem; color: var(--muted-foreground); font-family: var(--font-meta); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
 
 ::selection { background: #fff; color: #000; }
 .logo { font-family: var(--font-body); font-size: 0.875rem; font-weight: 700; letter-spacing: -0.08em; }
