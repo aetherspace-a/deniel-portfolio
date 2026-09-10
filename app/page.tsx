@@ -125,6 +125,21 @@ export default function Page() {
   const [showCookies, setShowCookies] = useState(true)
   const [assistantOpen, setAssistantOpen] = useState(false)
 
+  useEffect(() => {
+    let lastY = window.scrollY
+    let frame = 0
+    const update = () => {
+      const velocity = Math.max(-1, Math.min(1, (window.scrollY - lastY) / 80))
+      document.documentElement.style.setProperty('--scroll-skew', `${velocity * -0.35}deg`)
+      document.documentElement.style.setProperty('--scroll-spacing', `${Math.abs(velocity) * 0.012}em`)
+      lastY = window.scrollY
+      frame = 0
+    }
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update) }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => { window.removeEventListener('scroll', onScroll); if (frame) cancelAnimationFrame(frame) }
+  }, [])
+
   return (
     <>
       <AudioReactive />
@@ -137,11 +152,11 @@ export default function Page() {
       {showCookies && !isLoading && <CookieBanner onDismiss={() => setShowCookies(false)} />}
       <main id="top" className="portfolio-shell overflow-hidden">
       <header className="site-header mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 sm:py-6 lg:px-12">
-        <a href="#top" aria-label="Deniel John Prado home" className="logo">DJP<span>/</span></a>
+        <a href="#top" aria-label="Deniel John Prado home" data-magnetic className="logo">DJP<span>/</span></a>
         <nav aria-label="Primary navigation" className="flex items-center gap-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:gap-8">
-          <a href="#work" className="transition-colors hover:text-foreground">Work</a>
-          <a href="#music" className="transition-colors hover:text-foreground">Music</a>
-          <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
+          <a href="#work" data-magnetic className="transition-colors hover:text-foreground">Work</a>
+          <a href="#music" data-magnetic className="transition-colors hover:text-foreground">Music</a>
+          <a href="#contact" data-magnetic className="transition-colors hover:text-foreground">Contact</a>
         </nav>
       </header>
 
