@@ -7,6 +7,7 @@ const trailLength = 12
 export function CursorEffects() {
   const labelRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
+  const fieldRef = useRef<HTMLDivElement>(null)
   const blobRef = useRef<HTMLDivElement>(null)
   const trailRefs = useRef<(HTMLSpanElement | null)[]>([])
   const pointer = useRef({ x: -120, y: -120 })
@@ -54,6 +55,11 @@ export function CursorEffects() {
         glowRef.current.style.transform = `translate3d(${x - 20}vw, ${y - 20}vh, 0)`
         glowRef.current.style.setProperty('--cursor-energy', `${velocity}`)
       }
+      if (fieldRef.current) {
+        fieldRef.current.style.setProperty('--cursor-x', `${x}px`)
+        fieldRef.current.style.setProperty('--cursor-y', `${y}px`)
+        fieldRef.current.style.setProperty('--cursor-energy', `${velocity}`)
+      }
       trailRefs.current.forEach((dot, index) => {
         if (!dot) return
         dot.style.transform = `translate3d(${x - index * 4}px, ${y - index * 4}px, 0)`
@@ -70,6 +76,7 @@ export function CursorEffects() {
   }, [])
 
   return <>
+    <div ref={fieldRef} className="cursor-field" aria-hidden="true" />
     <div ref={glowRef} className="cursor-glow" aria-hidden="true" />
     <div ref={blobRef} className="cursor-blob" aria-hidden="true"><span className="cursor-arrow">↖</span></div>
     <div className="cursor-trail" aria-hidden="true">
