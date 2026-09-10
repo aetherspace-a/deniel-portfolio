@@ -174,9 +174,12 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .desk-section > .desk-heading, .desk-section > .reveal:not(.desk-canvas-shell) { position: relative; z-index: 2; }
 .desk-canvas-shell { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; margin: 0; }
 .desk-canvas-header { position: absolute; top: 1.5rem; right: 1.25rem; left: 1.25rem; z-index: 2; display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid rgb(255 255 255 / 22%); padding: 0.85rem 0; color: rgb(255 255 255 / 68%); font-family: var(--font-meta); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
-.desk-canvas-frame { position: relative; height: 100%; overflow: hidden; border: 0; background: #121212; }
+.desk-canvas-frame { position: relative; height: 100%; overflow: hidden; border: 0; background: #121212; isolation: isolate; }
+.desk-canvas-frame::before { position: absolute; inset: 0; z-index: 2; background: #000; pointer-events: none; content: ''; animation: desk-scene-fade 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .desk-canvas-frame::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgb(0 0 0 / 40%), transparent 28%, transparent 68%, rgb(0 0 0 / 55%)); pointer-events: none; content: ''; }
-.desk-canvas-frame canvas { touch-action: none; }
+.desk-canvas-frame canvas { touch-action: none; animation: desk-canvas-fade 1.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes desk-scene-fade { from { opacity: 1; } to { opacity: 0; } }
+@keyframes desk-canvas-fade { from { opacity: 0; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
 .desk-hotspot { display: block; border: 1px solid rgb(255 255 255 / 45%); background: rgb(0 0 0 / 65%); padding: 0.3rem 0.45rem; color: rgb(255 255 255 / 82%); font-family: var(--font-meta); font-size: 0.55rem; letter-spacing: 0.13em; text-transform: uppercase; opacity: 0.8; transition: opacity 180ms ease, background-color 180ms ease; user-select: none; }
 .desk-canvas-frame canvas:hover + .desk-caption { }
 .desk-caption { position: absolute; right: 1.25rem; bottom: 1.25rem; width: min(19rem, calc(100% - 2.5rem)); border: 1px solid rgb(255 255 255 / 22%); background: rgb(10 10 10 / 94%); padding: 1.25rem; color: var(--foreground); box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%); }
