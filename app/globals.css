@@ -64,7 +64,8 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .logo span { color: var(--muted-foreground); margin-left: 0.15rem; }
 .hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 22rem); align-items: end; gap: 2rem; padding-top: clamp(4rem, 10vw, 9rem); }
  .hero-title, .contact-title { font-family: var(--font-display); font-weight: 500; font-size: clamp(4.1rem, 12.5vw, 12rem); letter-spacing: -0.08em; line-height: 0.82; }
-.hero-title span { display: block; font-weight: 600; }
+.hero-title > .letter-reveal { display: block; }
+.hero-title .letter-reveal > span { display: inline-block; font-weight: 600; }
 .hero-title em { display: block; margin-left: clamp(2rem, 12vw, 14rem); font-size: 0.7em; line-height: 0.9; }
 .hero-title em, .contact-title em { font-style: italic; color: var(--muted-foreground); }
 .hero-subhead { width: min(100%, 19rem); justify-self: end; padding-bottom: 0.35rem; font-size: clamp(1.15rem, 2vw, 1.55rem); line-height: 1.15; letter-spacing: -0.04em; }
