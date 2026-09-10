@@ -18,7 +18,7 @@ export function Reveal({ children, delay = 0, label = 'content / Statement' }: {
       gsap.fromTo(node, { autoAlpha: 0, y: 22 }, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.85,
+        duration: 1.8,
         delay: delay / 1000,
         ease: 'power3.out',
         scrollTrigger: {
