@@ -237,6 +237,19 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .music-icon.brand-icon-applemusic { background: #ff8ac8; color: #251126; }
 .music-icon.brand-icon-youtube { background: #ff654f; color: #251126; }
 .footer-brand-icon { display: inline-grid; place-items: center; width: 1.1rem; height: 1.1rem; border: 1px solid currentColor; border-radius: 50%; font-size: .62rem; font-weight: 800; }
+.spiral-scroll { position: relative; z-index: 2; perspective: 900px; transform-origin: center; }
+.spiral-scroll::before { position: absolute; inset: 50% auto auto 50%; width: clamp(8rem, 18vw, 15rem); height: clamp(8rem, 18vw, 15rem); border: 1px dashed var(--accent); border-radius: 50%; content: ''; opacity: .5; transform: translate(-50%, -50%) rotate(28deg) scaleX(.7); }
+.about-spiral-mark { position: absolute; right: 9%; top: 12%; pointer-events: none; }
+.crency-mode .about-spiral-mark { display: none; }
+.spiral-badge { display: grid; place-items: center; width: 5.5rem; height: 5.5rem; border: 2px solid var(--accent-foreground); border-radius: 50%; background: var(--accent); color: var(--accent-foreground); font-family: var(--font-display); font-size: .68rem; font-weight: 800; line-height: .9; text-align: center; transform: rotate(-12deg); }
+.marquee-band { position: relative; z-index: 1; overflow: hidden; width: calc(100% + 2.5rem); margin: -1rem -1.25rem 3.5rem; padding: .55rem 0; border-block: 1px solid currentColor; font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.8rem); letter-spacing: -.04em; line-height: 1; white-space: nowrap; }
+.marquee-band > div { display: flex; width: max-content; }
+.marquee-band span { padding-right: 1.5rem; }
+.project-preview { position: relative; overflow: hidden; }
+.orbit-path { position: absolute; left: 50%; top: 50%; z-index: 3; pointer-events: none; }
+.orbit-dot { display: block; width: .85rem; height: .85rem; border: 2px solid var(--accent-foreground); border-radius: 50%; background: var(--foreground); box-shadow: 0 0 0 .35rem rgb(37 17 38 / 15%); }
+@media (max-width: 640px) { .about-spiral-mark { right: 4%; top: 8%; } .spiral-badge { width: 4.4rem; height: 4.4rem; font-size: .55rem; } .marquee-band { width: calc(100% + 2.5rem); } }
+@media (prefers-reduced-motion: reduce) { .spiral-scroll::before { transform: translate(-50%, -50%); } .about-spiral-mark { display: none; } .orbit-path { display: none; } }
 .project-card { transform-origin: center bottom; }
 .project-card:hover { animation: card-wiggle .65s cubic-bezier(.22,1,.36,1) both; }
 @keyframes card-wiggle { 0% { rotate: 0deg; } 35% { rotate: -1.5deg; } 70% { rotate: 1deg; } 100% { rotate: 0deg; } }
