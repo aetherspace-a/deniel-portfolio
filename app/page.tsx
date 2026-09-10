@@ -57,13 +57,21 @@ function CookieBanner({ onDismiss }: { onDismiss: () => void }) {
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true)
   const [showCookies, setShowCookies] = useState(true)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const updateScrollMode = () => setIsScrolled(window.scrollY > 72)
+    updateScrollMode()
+    window.addEventListener('scroll', updateScrollMode, { passive: true })
+    return () => window.removeEventListener('scroll', updateScrollMode)
+  }, [])
 
   return (
     <>
       <CursorEffects />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       {showCookies && !isLoading && <CookieBanner onDismiss={() => setShowCookies(false)} />}
-      <main id="top" className="overflow-hidden">
+      <main id="top" className={`portfolio-shell overflow-hidden${isScrolled ? ' is-scrolled' : ''}`}>
       <header className="site-header mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 sm:py-6 lg:px-12">
         <a href="#top" aria-label="Deniel John Prado home" className="logo">DJP<span>/</span></a>
         <nav aria-label="Primary navigation" className="flex items-center gap-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:gap-8">
