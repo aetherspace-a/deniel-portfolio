@@ -25,6 +25,14 @@ export const metadata: Metadata = {
     description: 'Community, documentation, design, and code by Deniel John Prado.',
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: '/djp-mark.svg', type: 'image/svg+xml', sizes: 'any' },
+      { url: '/djp-mark.svg', sizes: '16x16', type: 'image/svg+xml' },
+      { url: '/djp-mark.svg', sizes: '32x32', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/djp-mark.svg', sizes: '180x180', type: 'image/svg+xml' }],
+  },
 }
 
 export const viewport: Viewport = { colorScheme: 'dark', themeColor: '#000000', userScalable: false }

@@ -46,7 +46,7 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
     return () => window.clearInterval(timer)
   }, [onComplete])
 
-  return <div className="loading-screen" role="status" aria-live="polite"><div className="loading-mark">DJP<span>/</span></div><div className="loading-progress"><span style={{ width: `${progress}%` }} /></div><div className="loading-meta"><Meta>Loading portfolio</Meta><Meta>{progress}%</Meta></div></div>
+  return <div className="loading-screen" role="status" aria-live="polite"><div className="loading-state"><div className="loading-mark">DJP<span>/</span></div><p className="loading-label">Loading portfolio</p><div className="loading-progress"><span style={{ width: `${progress}%` }} /></div><div className="loading-meta"><Meta>Loading portfolio</Meta><Meta>{progress}%</Meta></div></div></div>
 }
 
 function CookieBanner({ onDismiss }: { onDismiss: () => void }) {
