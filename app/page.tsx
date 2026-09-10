@@ -3,10 +3,19 @@
 import { ArrowUpRight, Mail } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 
+const tools = [
+  { name: 'HTML', icon: 'html5' },
+  { name: 'JavaScript', icon: 'javascript' },
+  { name: 'Python', icon: 'python' },
+  { name: 'Discord bots', icon: 'discord' },
+  { name: 'GitHub', icon: 'github' },
+  { name: 'Vercel', icon: 'vercel' },
+]
+
 const projects = [
-  { year: '2026', title: 'Community, in public', category: 'Community systems', description: 'A practical field guide for turning online communities into places people return to.', result: 'A living toolkit' },
-  { year: '2025', title: 'Words that work', category: 'Technical documentation', description: 'Documentation systems that make complex products easier to understand, adopt, and maintain.', result: 'Clearer product stories' },
-  { year: '2024', title: 'Small tools, real utility', category: 'Design + code', description: 'Small interfaces and experiments built around one sharp question and a useful answer.', result: 'Ongoing practice' },
+  { title: 'Asiana-PTFS-Website', description: 'The official Asiana Airlines PTFS site.', href: 'https://github.com/aetherspace-a/Asiana-PTFS-Website' },
+  { title: 'AsianaPTFS-VAMS', description: 'A Discord bot and dashboard for virtual airline operations.', href: 'https://github.com/aetherspace-a/AsianaPTFS-VAMS' },
+  { title: 'mytimeisaether', description: 'A personal in-bio site for the work between projects.', href: 'https://github.com/aetherspace-a/mytimeisaether' },
 ]
 
 function Meta({ children }: { children: React.ReactNode }) {
@@ -38,14 +47,21 @@ export default function Page() {
         <Reveal delay={100}><div className="mt-12 lg:mt-0"><p className="section-statement">A jack of all trades, with a soft spot for the seams between them.</p><p className="mt-10 max-w-xl text-[1rem] leading-7 text-muted-foreground">My work moves between community leadership, design, technical writing, and code. I am interested in the connective tissue: the language, systems, and small decisions that help good ideas become useful in the real world.</p></div></Reveal>
       </section>
 
-      <section id="work" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
-        <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>03 — Selected work</Meta></Reveal><Reveal delay={60}><Meta>Three directions, one practice</Meta></Reveal></div>
-        <div className="border-y border-border">{projects.map((project, index) => <Reveal key={project.title} delay={index * 70}><article className="project-row grid gap-5 border-b border-border py-8 last:border-0 sm:grid-cols-[4rem_1.2fr_1fr] sm:gap-8 sm:py-10 lg:grid-cols-[5rem_1.2fr_1fr_8rem] lg:gap-10"><Meta>{project.year}</Meta><div><Meta>{project.category}</Meta><h2 className="mt-4 text-[2rem] font-medium leading-[0.95] tracking-[-0.055em] sm:text-4xl lg:text-5xl">{project.title}</h2></div><div><p className="max-w-md text-[0.95rem] leading-6 text-muted-foreground">{project.description}</p><Meta>{project.result}</Meta></div></article></Reveal>)}</div>
+      <section id="stack" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
+        <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>03 — Tools &amp; stack</Meta></Reveal><Reveal delay={60}><Meta>The things behind the work</Meta></Reveal></div>
+        <div className="grid grid-cols-2 border-y border-border sm:grid-cols-3 lg:grid-cols-6">
+          {tools.map((tool, index) => <Reveal key={tool.name} delay={index * 50}><div className="flex min-h-36 flex-col justify-between border-b border-border p-5 last:border-0 sm:min-h-40 sm:border-r sm:p-6 lg:border-b-0 lg:border-r lg:last:border-r-0"><img src={`https://cdn.simpleicons.org/${tool.icon}/ffffff`} alt="" aria-hidden="true" className="h-7 w-7 object-contain opacity-85" /><span className="text-sm tracking-[-0.02em]">{tool.name}</span></div></Reveal>)}
+        </div>
       </section>
 
-      <section id="contact" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><Reveal><Meta>04 — Contact</Meta></Reveal><div className="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-[1fr_2fr] lg:items-end"><Reveal delay={100}><h2 className="contact-title">Let&apos;s make<br /><em>something</em><br />useful.</h2></Reveal><Reveal delay={180}><div className="lg:justify-self-end"><p className="mb-8 max-w-sm text-[1rem] leading-7 text-muted-foreground">Have a question, a half-formed idea, or a problem that needs a few different kinds of thinking?</p><a href="mailto:hello@denieljohnprado.com" className="group inline-flex items-center gap-3 border-b border-foreground pb-3 text-sm transition-colors hover:text-muted-foreground">hello@denieljohnprado.com <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></div></Reveal></div></section>
+      <section id="work" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
+        <div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>04 — Selected work</Meta></Reveal><Reveal delay={60}><Meta>Built in public</Meta></Reveal></div>
+        <div className="border-y border-border">{projects.map((project, index) => <Reveal key={project.title} delay={index * 70}><a href={project.href} target="_blank" rel="noreferrer" className="project-row group grid gap-5 border-b border-border py-8 last:border-0 sm:grid-cols-[1.2fr_1fr_2rem] sm:gap-8 sm:py-10 lg:grid-cols-[1.2fr_1fr_2rem] lg:gap-10"><div><h2 className="text-[1.7rem] font-medium leading-[0.95] tracking-[-0.055em] transition-colors group-hover:text-muted-foreground sm:text-4xl lg:text-5xl">{project.title}</h2></div><p className="max-w-md self-end text-[0.95rem] leading-6 text-muted-foreground">{project.description}</p><ArrowUpRight className="h-5 w-5 justify-self-end transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></Reveal>)}</div>
+      </section>
 
-      <footer className="mx-auto flex max-w-[1440px] flex-col gap-5 border-t border-border px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"><Meta>© 2026 Deniel John Prado</Meta><div className="flex gap-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"><a href="mailto:hello@denieljohnprado.com" className="inline-flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> Email</a><a href="https://github.com" className="hover:text-foreground">GitHub</a><a href="https://linkedin.com" className="hover:text-foreground">LinkedIn</a></div><Meta>Built with intention</Meta></footer>
+      <section id="contact" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><Reveal><Meta>05 — Contact</Meta></Reveal><div className="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-[1fr_2fr] lg:items-end"><Reveal delay={100}><h2 className="contact-title">Let&apos;s make<br /><em>something</em><br />useful.</h2></Reveal><Reveal delay={180}><div className="lg:justify-self-end"><p className="mb-8 max-w-sm text-[1rem] leading-7 text-muted-foreground">Have a question, a half-formed idea, or a problem that needs a few different kinds of thinking?</p><a href="mailto:hello@deniel.lol" className="group inline-flex items-center gap-3 border-b border-foreground pb-3 text-sm transition-colors hover:text-muted-foreground">hello@deniel.lol <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></div></Reveal></div></section>
+
+      <footer className="mx-auto flex max-w-[1440px] flex-col gap-5 border-t border-border px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"><Meta>© 2026 Deniel John Prado</Meta><div className="flex gap-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"><a href="mailto:hello@deniel.lol" className="inline-flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> Email</a><a href="https://github.com/aetherspace-a" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><img src="https://cdn.simpleicons.org/github/ffffff" alt="" aria-hidden="true" className="h-3.5 w-3.5" /> GitHub</a><a href="https://linkedin.com" className="hover:text-foreground">LinkedIn</a></div><Meta>Built with intention</Meta></footer>
     </main>
   )
 }
