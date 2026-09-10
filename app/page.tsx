@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { ArrowUpRight, Mail } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 
@@ -28,9 +29,39 @@ function Meta({ children }: { children: React.ReactNode }) {
   return <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">{children}</span>
 }
 
+function LoadingScreen({ onComplete }: { onComplete: () => void }) {
+  const [progress, setProgress] = useState(1)
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setProgress((current) => {
+        if (current >= 100) {
+          window.clearInterval(timer)
+          window.setTimeout(onComplete, 220)
+          return 100
+        }
+        return Math.min(current + 4, 100)
+      })
+    }, 28)
+    return () => window.clearInterval(timer)
+  }, [onComplete])
+
+  return <div className="loading-screen" role="status" aria-live="polite"><div className="loading-mark">DJP<span>/</span></div><div className="loading-progress"><span style={{ width: `${progress}%` }} /></div><div className="loading-meta"><Meta>Loading portfolio</Meta><Meta>{progress}%</Meta></div></div>
+}
+
+function CookieBanner({ onDismiss }: { onDismiss: () => void }) {
+  return <aside className="cookie-banner" aria-label="Cookie notice"><div><Meta>Privacy</Meta><p>Small cookies help this site remember your preferences. No tracking cookies are used.</p></div><button type="button" onClick={onDismiss}>Okay</button></aside>
+}
+
 export default function Page() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [showCookies, setShowCookies] = useState(true)
+
   return (
-    <main id="top" className="overflow-hidden">
+    <>
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      {showCookies && !isLoading && <CookieBanner onDismiss={() => setShowCookies(false)} />}
+      <main id="top" className="overflow-hidden">
       <header className="site-header mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 sm:py-6 lg:px-12">
         <a href="#top" aria-label="Deniel John Prado home" className="logo">DJP<span>/</span></a>
         <nav aria-label="Primary navigation" className="flex items-center gap-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:gap-8">
@@ -73,5 +104,6 @@ export default function Page() {
 
       <footer className="mx-auto flex max-w-[1440px] flex-col gap-5 border-t border-border px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"><Meta>© 2026 Deniel John Prado</Meta><div className="flex gap-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"><a href="mailto:hello@deniel.lol" className="inline-flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> Email</a><a href="https://github.com/aetherspace-a" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><img src="https://cdn.simpleicons.org/github/ffffff" alt="" aria-hidden="true" className="h-3.5 w-3.5" /> GitHub</a><a href="https://linkedin.com" className="hover:text-foreground">LinkedIn</a></div><Meta>Built with intention</Meta></footer>
     </main>
+    </>
   )
 }
