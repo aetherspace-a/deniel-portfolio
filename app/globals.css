@@ -43,6 +43,17 @@ body { @apply bg-background text-foreground font-sans antialiased; }
 .project-row { transition: background-color 180ms ease, padding 180ms ease; }
 .project-row { transition: background-color 180ms ease, padding 180ms ease; }
 .project-row:hover { background: var(--muted); }
+.music-intro { display: grid; gap: 1.5rem; margin-bottom: 3rem; max-width: 58rem; }
+.music-statement { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 5.2rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.07em; }
+.music-note { max-width: 22rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.6; }
+.music-links { max-width: 58rem; border-top: 1px solid var(--border); }
+.music-link { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; min-height: 5.5rem; border-bottom: 1px solid var(--border); transition: background-color 180ms ease, padding 180ms ease; }
+.music-link:hover { background: var(--muted); padding-inline: 1rem; }
+.music-icon { display: grid; place-items: center; height: 2.25rem; width: 2.25rem; border: 1px solid var(--border); }
+.music-icon img { height: 1rem; width: 1rem; object-fit: contain; }
+.music-link strong, .music-link small { display: block; }
+.music-link strong { font-size: 1.1rem; font-weight: 500; letter-spacing: -0.03em; }
+.music-link small { margin-top: 0.25rem; color: var(--muted-foreground); font-size: 0.75rem; }
 
 ::selection { background: #fff; color: #000; }
 .logo { font-family: var(--font-body); font-size: 0.875rem; font-weight: 700; letter-spacing: -0.08em; }
@@ -66,6 +77,9 @@ body { @apply bg-background text-foreground font-sans antialiased; }
   .hero-bridge { grid-template-columns: 1fr; gap: 1.25rem; margin-top: 5rem; }
   .hero-bridge p { max-width: 20rem; }
   .stack-intro { margin-bottom: 2rem; }
+  .music-intro { margin-bottom: 2rem; }
+  .music-link { min-height: 4.75rem; }
+  .music-link:hover { padding-inline: 0.5rem; }
   .stack-item { grid-template-columns: 2rem 1.25rem minmax(0, 1fr); gap: 0.75rem; min-height: 4.25rem; }
   .stack-role { display: none; }
   .stack-item:hover { padding-inline: 0.5rem; }

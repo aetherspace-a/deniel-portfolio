@@ -18,6 +18,12 @@ const projects = [
   { title: 'mytimeisaether', description: 'A personal in-bio site for the work between projects.', href: 'https://github.com/aetherspace-a/mytimeisaether' },
 ]
 
+const musicLinks = [
+  { name: 'Spotify', detail: 'Listen on Spotify', icon: 'spotify', href: 'https://open.spotify.com/artist/0hShtOro50E68407ZrT06D' },
+  { name: 'Apple Music', detail: 'Listen on Apple Music', icon: 'applemusic', href: 'https://music.apple.com/ph/artist/zeopspace/1894512614' },
+  { name: 'YouTube', detail: 'Watch on YouTube', icon: 'youtube', href: 'https://youtube.com/@zeopspacemusic' },
+]
+
 function Meta({ children }: { children: React.ReactNode }) {
   return <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">{children}</span>
 }
@@ -29,6 +35,7 @@ export default function Page() {
         <a href="#top" aria-label="Deniel John Prado home" className="logo">DJP<span>/</span></a>
         <nav aria-label="Primary navigation" className="flex items-center gap-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:gap-8">
           <a href="#work" className="transition-colors hover:text-foreground">Work</a>
+          <a href="#music" className="transition-colors hover:text-foreground">Music</a>
           <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
         </nav>
       </header>
@@ -60,7 +67,9 @@ export default function Page() {
         <div className="border-y border-border">{projects.map((project, index) => <Reveal key={project.title} delay={index * 70}><a href={project.href} target="_blank" rel="noreferrer" className="project-row group grid gap-5 border-b border-border py-8 last:border-0 sm:grid-cols-[1.2fr_1fr_2rem] sm:gap-8 sm:py-10 lg:grid-cols-[1.2fr_1fr_2rem] lg:gap-10"><div><h2 className="text-[1.7rem] font-medium leading-[0.95] tracking-[-0.055em] transition-colors group-hover:text-muted-foreground sm:text-4xl lg:text-5xl">{project.title}</h2></div><p className="max-w-md self-end text-[0.95rem] leading-6 text-muted-foreground">{project.description}</p><ArrowUpRight className="h-5 w-5 justify-self-end transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></Reveal>)}</div>
       </section>
 
-      <section id="contact" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><Reveal><Meta>05 — Contact</Meta></Reveal><div className="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-[1fr_2fr] lg:items-end"><Reveal delay={100}><h2 className="contact-title">Let&apos;s make<br /><em>something</em><br />useful.</h2></Reveal><Reveal delay={180}><div className="lg:justify-self-end"><p className="mb-8 max-w-sm text-[1rem] leading-7 text-muted-foreground">Have a question, a half-formed idea, or a problem that needs a few different kinds of thinking?</p><a href="mailto:hello@deniel.lol" className="group inline-flex items-center gap-3 border-b border-foreground pb-3 text-sm transition-colors hover:text-muted-foreground">hello@deniel.lol <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></div></Reveal></div></section>
+      <section id="music" className="music-section content-section mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><div className="mb-12 flex items-end justify-between gap-8"><Reveal><Meta>05 — Music</Meta></Reveal><Reveal delay={60}><Meta>lofi / zeopspace</Meta></Reveal></div><Reveal><div className="music-intro"><p className="music-statement">A quieter place to land.</p><p className="music-note">I make lofi music as zeopspace — soft loops for late nights, long flights, and slow work.</p></div></Reveal><div className="music-links">{musicLinks.map((link, index) => <Reveal key={link.name} delay={index * 70}><a href={link.href} target="_blank" rel="noreferrer" className="music-link group"><span className="music-icon"><img src={`https://cdn.simpleicons.org/${link.icon}/ffffff`} alt="" aria-hidden="true" /></span><span><strong>{link.name}</strong><small>{link.detail}</small></span><ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></Reveal>)}</div></section>
+
+      <section id="contact" className="mx-auto max-w-[1440px] border-t border-border px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"><Reveal><Meta>06 — Contact</Meta></Reveal><div className="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-[1fr_2fr] lg:items-end"><Reveal delay={100}><h2 className="contact-title">Let&apos;s make<br /><em>something</em><br />useful.</h2></Reveal><Reveal delay={180}><div className="lg:justify-self-end"><p className="mb-8 max-w-sm text-[1rem] leading-7 text-muted-foreground">Have a question, a half-formed idea, or a problem that needs a few different kinds of thinking?</p><a href="mailto:hello@deniel.lol" className="group inline-flex items-center gap-3 border-b border-foreground pb-3 text-sm transition-colors hover:text-muted-foreground">hello@deniel.lol <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></a></div></Reveal></div></section>
 
       <footer className="mx-auto flex max-w-[1440px] flex-col gap-5 border-t border-border px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"><Meta>© 2026 Deniel John Prado</Meta><div className="flex gap-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"><a href="mailto:hello@deniel.lol" className="inline-flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> Email</a><a href="https://github.com/aetherspace-a" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><img src="https://cdn.simpleicons.org/github/ffffff" alt="" aria-hidden="true" className="h-3.5 w-3.5" /> GitHub</a><a href="https://linkedin.com" className="hover:text-foreground">LinkedIn</a></div><Meta>Built with intention</Meta></footer>
     </main>
