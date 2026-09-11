@@ -82,5 +82,5 @@ export function SiteEffects() {
     }
   }, [])
 
-  return <><div className={`site-loader ${loading ? 'is-visible' : 'is-hidden'}`} aria-hidden={!loading}><div className="loader-mark">D<span>.</span></div><div className="loader-line"><i /></div><p>Making useful things</p></div><div className="site-cursor user-cursor" data-user-cursor aria-hidden="true"><PointerIcon color="var(--teal)" /><span className="cursor-name-tag">You</span></div></>
+  return <><div className={`site-loader ${loading ? 'is-visible' : 'is-hidden'}`} aria-hidden={!loading}><div className="loader-mark"><img src="/deniel-logo.svg" alt="Deniel John Prado" /></div><div className="loader-line"><i /></div><p>Making useful things</p></div><div className="site-cursor user-cursor" data-user-cursor aria-hidden="true"><PointerIcon color="var(--teal)" /><span className="cursor-name-tag">You</span></div></>
 }
