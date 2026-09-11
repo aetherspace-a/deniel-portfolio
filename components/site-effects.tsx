@@ -59,24 +59,37 @@ export function SiteEffects() {
       if (interaction.mode === 'resize') timeline.to(denielCursor, { left: point.x + 54, duration: .4, ease: 'power2.inOut' }).to(target, { scaleX: 1.035, transformOrigin: 'left center', duration: .35 }).to(target, { scaleX: 1, duration: .45 })
       if (interaction.mode === 'type') timeline.to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16, repeat: 2, yoyo: true }).to(denielCursor, { left: point.x + Math.min(interaction.text.length * 3, 90), duration: .45 })
       if (interaction.mode === 'click') timeline.to(denielCursor, { scale: .72, duration: .1 }).to(denielCursor, { scale: 1, duration: .2, ease: 'back.out(2)' })
-      timeline.to(denielCursor, { left: `+=${direction * 7}`, top: `+=${index % 2 ? -5 : 5}`, duration: .7, ease: 'sine.inOut', repeat: 3, yoyo: true })
+      timeline.to(denielCursor, { left: `+=${direction * 7}`, top: `+=${index % 2 ? -5 : 5}`, duration: .7, ease: 'sine.inOut' })
     }
 
     let activeIndex = -1
+    let lastScrollY = window.scrollY
+    let journeyStarted = false
     const updateTargets = () => {
       if (touch || reduce) return
-      const nextIndex = interactions.findIndex((interaction) => {
+      const scrollingDown = window.scrollY >= lastScrollY
+      const hero = document.querySelector('[data-cursor-target="hero"]')
+      const heroTop = hero ? hero.getBoundingClientRect().top + window.scrollY : 0
+      const passedHeroResetPoint = window.scrollY < heroTop + window.innerHeight * .2
+      if (passedHeroResetPoint && !scrollingDown) {
+        activeIndex = -1
+        journeyStarted = false
+      }
+      lastScrollY = window.scrollY
+      const visibleIndex = interactions.findIndex((interaction) => {
         const element = document.querySelector(interaction.selector)
         if (!element) return false
         const rect = element.getBoundingClientRect()
         return rect.top < window.innerHeight * .72 && rect.bottom > window.innerHeight * .2
       })
-      if (nextIndex < 0 || nextIndex === activeIndex) return
+      const nextIndex = journeyStarted ? interactions.findIndex((_, index) => index > activeIndex && index === visibleIndex) : visibleIndex
+      if (nextIndex < 0 || nextIndex <= activeIndex) return
       const interaction = interactions[nextIndex]
       const target = document.querySelector(interaction.selector)
       const point = target ? getTargetPoint(target) : null
       if (!target || !point) return
       activeIndex = nextIndex
+      journeyStarted = true
       runArrival(target, interaction, point)
     }
 
