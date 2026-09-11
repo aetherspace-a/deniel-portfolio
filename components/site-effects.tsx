@@ -57,7 +57,7 @@ export function SiteEffects() {
 
       if (interaction.mode === 'highlight') timeline.to(target, { backgroundColor: 'var(--coral)', color: 'var(--foreground)', paddingInline: '.35rem', duration: .2 }).to(target, { backgroundColor: 'transparent', color: '', paddingInline: 0, duration: .65, delay: .2 })
       if (interaction.mode === 'resize') timeline.to(denielCursor, { left: point.x + 54, duration: .4, ease: 'power2.inOut' }).to(target, { scaleX: 1.035, transformOrigin: 'left center', duration: .35 }).to(target, { scaleX: 1, duration: .45 })
-      if (interaction.mode === 'type') timeline.to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16, repeat: 2, yoyo: true }).to(denielCursor, { left: point.x + Math.min(interaction.text.length * 3, 90), duration: .45 })
+      if (interaction.mode === 'type') timeline.to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16 }).to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16 }).to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16 }).to(denielCursor, { left: point.x + Math.min(interaction.text.length * 3, 90), duration: .45 })
       if (interaction.mode === 'click') timeline.to(denielCursor, { scale: .72, duration: .1 }).to(denielCursor, { scale: 1, duration: .2, ease: 'back.out(2)' })
       timeline.to(denielCursor, { left: `+=${direction * 7}`, top: `+=${index % 2 ? -5 : 5}`, duration: .7, ease: 'sine.inOut' })
     }
