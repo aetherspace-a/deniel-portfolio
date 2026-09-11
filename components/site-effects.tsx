@@ -79,8 +79,6 @@ export function SiteEffects() {
       cancelAnimationFrame(raf)
       lenis?.destroy()
       cleanups.forEach((cleanup) => cleanup())
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-      gsap.killTweensOf('*')
     }
   }, [])
 
