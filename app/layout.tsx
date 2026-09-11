@@ -5,8 +5,8 @@ import { SmoothScrollProvider } from '@/components/smooth-scroll-provider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://deniel.lol'),
-  title: 'Deniel John Prado — Community, documentation, code',
-  description: 'The portfolio of Deniel John Prado, a generalist working across community, documentation, design, and code.',
+  title: 'Deniel John Prado — Useful things, with a pulse',
+  description: 'The portfolio of Deniel John Prado: developer, designer, and community builder making useful digital spaces.',
   applicationName: 'Deniel John Prado',
   authors: [{ name: 'Deniel John Prado', url: 'https://github.com/aetherspace-a' }],
   creator: 'Deniel John Prado',
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
 }
 
-export const viewport: Viewport = { colorScheme: 'dark', themeColor: '#000000', userScalable: false }
+export const viewport: Viewport = { colorScheme: 'light dark', themeColor: '#f2f3e9', userScalable: false }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className="bg-background" style={{ '--font-display': 'Fraunces, Georgia, "Times New Roman", serif', '--font-body': 'IBM Plex Sans, "Helvetica Neue", Arial, sans-serif', '--font-meta': 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' } as React.CSSProperties}><body><SmoothScrollProvider>{children}</SmoothScrollProvider>{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="en" className="bg-background" style={{ '--font-display': 'Fraunces, Georgia, "Times New Roman", serif', '--font-body': 'IBM Plex Sans, "Helvetica Neue", Arial, sans-serif', '--font-meta': 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', '--font-mono-face': 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' } as React.CSSProperties}><body><SmoothScrollProvider>{children}</SmoothScrollProvider>{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }
