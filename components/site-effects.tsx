@@ -45,12 +45,14 @@ export function SiteEffects() {
       const index = interactions.indexOf(interaction)
       const direction = index % 2 === 0 ? 1 : -1
       const from = { x: Number(gsap.getProperty(denielCursor, 'left')) || point.x, y: Number(gsap.getProperty(denielCursor, 'top')) || point.y }
-      const bend = 70 + (index % 4) * 24
-      const lift = 44 + (index % 3) * 20
+      const variance = 0.8 + Math.random() * .4
+      const bend = (70 + (index % 4) * 24) * variance
+      const lift = (44 + (index % 3) * 20) * (0.9 + Math.random() * .2)
+      const travelDuration = (0.85 + (index % 3) * .15) * variance
       gsap.killTweensOf(denielCursor)
-      const timeline = gsap.timeline({ delay: .12 })
+      const timeline = gsap.timeline({ delay: .12 + Math.random() * .12 })
       timeline.set(denielCursor, { left: from.x, top: from.y, x: 0, y: 0 })
-        .to(denielCursor, { motionPath: { path: [{ x: from.x, y: from.y }, { x: from.x + direction * bend, y: from.y - lift }, { x: point.x - direction * bend * .55, y: point.y + lift }, { x: point.x, y: point.y }], curviness: 1.25 }, duration: .85 + (index % 3) * .15, ease: 'power2.inOut' })
+        .to(denielCursor, { motionPath: { path: [{ x: from.x, y: from.y }, { x: from.x + direction * bend, y: from.y - lift }, { x: point.x - direction * bend * .55, y: point.y + lift }, { x: point.x, y: point.y }], curviness: 1.25 }, duration: travelDuration, ease: 'power2.inOut' })
         .to(denielCursor, { left: point.x - direction * 5, top: point.y + 3, duration: .1, ease: 'power2.out' })
         .to(denielCursor, { left: point.x, top: point.y, scale: .82, duration: .12, ease: 'power2.in' })
         .to(denielCursor, { scale: 1, duration: .22, ease: 'back.out(2)' })
@@ -65,6 +67,17 @@ export function SiteEffects() {
     let activeIndex = -1
     let lastScrollY = window.scrollY
     let journeyStarted = false
+    let cycleResetTimer = 0
+    const scheduleSoftCycleReset = () => {
+      window.clearTimeout(cycleResetTimer)
+      cycleResetTimer = window.setTimeout(() => {
+        if (!journeyStarted || !denielCursor) return
+        gsap.timeline().to(denielCursor, { opacity: .28, duration: 1.8, ease: 'sine.inOut' }).set(denielCursor, { scale: 1 }).to(denielCursor, { opacity: 1, duration: 2.4, ease: 'sine.inOut' })
+        activeIndex = -1
+        journeyStarted = false
+        scheduleSoftCycleReset()
+      }, 45000 + Math.random() * 45000)
+    }
     const updateTargets = () => {
       if (touch || reduce) return
       const scrollingDown = window.scrollY >= lastScrollY
@@ -90,6 +103,7 @@ export function SiteEffects() {
       if (!target || !point) return
       activeIndex = nextIndex
       journeyStarted = true
+      scheduleSoftCycleReset()
       runArrival(target, interaction, point)
     }
 
@@ -103,7 +117,7 @@ export function SiteEffects() {
       updateTargets()
     })
     window.addEventListener('load', refreshPositions)
-    return () => { window.clearTimeout(introTimer); window.removeEventListener('pointermove', moveUser); window.removeEventListener('scroll', updateTargets); window.removeEventListener('resize', refreshPositions); window.removeEventListener('load', refreshPositions); gsap.killTweensOf(denielCursor); ctx.revert() }
+    return () => { window.clearTimeout(introTimer); window.clearTimeout(cycleResetTimer); window.removeEventListener('pointermove', moveUser); window.removeEventListener('scroll', updateTargets); window.removeEventListener('resize', refreshPositions); window.removeEventListener('load', refreshPositions); gsap.killTweensOf(denielCursor); ctx.revert() }
   }, [])
 
   return <><div className={`site-loader ${loading ? 'is-visible' : 'is-hidden'}`} aria-hidden={!loading}><div className="loader-mark">D<span>.</span></div><div className="loader-line"><i /></div><p>Making useful things</p></div><div className="site-cursor user-cursor" data-user-cursor aria-hidden="true"><PointerIcon color="var(--teal)" /><span className="cursor-name-tag">You</span></div><div className="deniel-cursor" data-deniel-cursor aria-hidden="true"><PointerIcon color="var(--coral)" /><span className="cursor-name-tag">Deniel</span></div></>
