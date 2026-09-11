@@ -39,15 +39,16 @@ export function SiteEffects() {
       const direction = index % 2 === 0 ? 1 : -1
       const lift = 44 + (index % 3) * 18
       const sway = direction * (70 + (index % 4) * 22)
+      gsap.set(denielCursor, { x: 0, y: 0, left: x, top: y })
       const tl = gsap.timeline({ delay: .08 })
-      tl.to(denielCursor, { keyframes: [{ x: x - sway * .55, y: y + lift }, { x: x + sway * .28, y: y - lift * .35 }, { x: x + direction * 14, y: y + 8 }, { x, y }], duration: .95 + (index % 3) * .12, ease: 'power2.inOut' })
-        .to(denielCursor, { x: x - direction * 5, y: y + 3, duration: .11, ease: 'power2.out' })
-        .to(denielCursor, { x, y, scale: .82, duration: .13, ease: 'power2.in' })
+      tl.to(denielCursor, { keyframes: [{ left: x - sway * .55, top: y + lift }, { left: x + sway * .28, top: y - lift * .35 }, { left: x + direction * 14, top: y + 8 }, { left: x, top: y }], duration: .95 + (index % 3) * .12, ease: 'power2.inOut' })
+        .to(denielCursor, { left: x - direction * 5, top: y + 3, duration: .11, ease: 'power2.out' })
+        .to(denielCursor, { left: x, top: y, scale: .82, duration: .13, ease: 'power2.in' })
         .to(denielCursor, { scale: 1, duration: .24, ease: 'back.out(2)' })
       if (mode === 'highlight') tl.to(target, { backgroundColor: 'var(--coral)', color: 'var(--foreground)', paddingInline: '.35rem', duration: .2 }).to(target, { backgroundColor: 'transparent', color: '', paddingInline: 0, duration: .65, delay: .2 })
-      if (mode === 'resize') tl.to(denielCursor, { x: x + 54, duration: .4, ease: 'power2.inOut' }).to(target, { scaleX: 1.035, transformOrigin: 'left center', duration: .35 }).to(target, { scaleX: 1, duration: .45 })
-      if (mode === 'type') tl.to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16, repeat: 2, yoyo: true }).to(denielCursor, { x: x + Math.min(text.length * 3, 90), duration: .45 })
-      tl.to(denielCursor, { x: `+=${direction * 7}`, y: `+=${index % 2 ? -5 : 5}`, duration: .8, ease: 'sine.inOut', repeat: -1, yoyo: true })
+      if (mode === 'resize') tl.to(denielCursor, { left: x + 54, duration: .4, ease: 'power2.inOut' }).to(target, { scaleX: 1.035, transformOrigin: 'left center', duration: .35 }).to(target, { scaleX: 1, duration: .45 })
+      if (mode === 'type') tl.to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16, repeat: 2, yoyo: true }).to(denielCursor, { left: x + Math.min(text.length * 3, 90), duration: .45 })
+      tl.to(denielCursor, { left: `+=${direction * 7}`, top: `+=${index % 2 ? -5 : 5}`, duration: .8, ease: 'sine.inOut', repeat: -1, yoyo: true })
     }
     window.addEventListener('pointermove', moveUser)
     const refresh = () => ScrollTrigger.refresh()
