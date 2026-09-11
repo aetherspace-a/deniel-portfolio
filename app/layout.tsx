@@ -6,12 +6,12 @@ import { SmoothScrollProvider } from '@/components/smooth-scroll-provider'
 export const metadata: Metadata = {
   metadataBase: new URL('https://deniel.lol'),
   title: 'Deniel John Prado — Useful things, with a pulse',
-  description: 'The portfolio of Deniel John Prado: developer, designer, and community builder making useful digital spaces.',
+  description: 'Deniel John Prado is a student developer from the Philippines building full stack applications, Discord bots, automation, and useful software.',
   applicationName: 'Deniel John Prado',
   authors: [{ name: 'Deniel John Prado', url: 'https://github.com/aetherspace-a' }],
   creator: 'Deniel John Prado',
   publisher: 'Deniel John Prado',
-  keywords: ['Deniel John Prado', 'community', 'documentation', 'design', 'JavaScript', 'Python'],
+  keywords: ['Deniel John Prado', 'aetherspace-a', 'student developer', 'full stack development', 'Discord bots', 'automation', 'JavaScript', 'Python', 'Next.js', 'backend engineering'],
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
