@@ -2,18 +2,21 @@
 
 import { useEffect, useState } from 'react'
 import { gsap } from 'gsap'
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(MotionPathPlugin, ScrollTrigger)
 
-const interactions = [
-  { selector: '[data-cursor-target="hero"]', mode: 'type', label: 'retyping', text: 'useful things' },
-  { selector: '[data-cursor-target="about"]', mode: 'highlight', label: 'highlight', text: 'human' },
-  { selector: '[data-cursor-target="timeline"]', mode: 'click', label: 'click', text: '2023' },
-  { selector: '[data-cursor-target="tools"]', mode: 'resize', label: 'resize', text: 'toolkit' },
-  { selector: '[data-cursor-target="work"]', mode: 'click', label: 'click', text: 'Community Atlas' },
-  { selector: '[data-cursor-target="music"]', mode: 'click', label: 'play', text: 'play' },
-  { selector: '[data-cursor-target="contact"]', mode: 'type', label: 'retyping', text: 'hello@deniel.lol' },
+type Interaction = { selector: string; mode: 'type' | 'highlight' | 'click' | 'resize'; text: string }
+
+const interactions: Interaction[] = [
+  { selector: '[data-cursor-target="hero"]', mode: 'type', text: 'useful things' },
+  { selector: '[data-cursor-target="about"]', mode: 'highlight', text: 'human' },
+  { selector: '[data-cursor-target="timeline"]', mode: 'click', text: '2023' },
+  { selector: '[data-cursor-target="tools"]', mode: 'resize', text: 'toolkit' },
+  { selector: '[data-cursor-target="work"]', mode: 'click', text: 'Community Atlas' },
+  { selector: '[data-cursor-target="music"]', mode: 'click', text: 'play' },
+  { selector: '[data-cursor-target="contact"]', mode: 'type', text: 'hello@deniel.lol' },
 ]
 
 function PointerIcon({ color }: { color: string }) {
@@ -22,6 +25,7 @@ function PointerIcon({ color }: { color: string }) {
 
 export function SiteEffects() {
   const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const touch = window.innerWidth <= 700
@@ -29,36 +33,65 @@ export function SiteEffects() {
     const userCursor = document.querySelector<HTMLElement>('[data-user-cursor]')
     const denielCursor = document.querySelector<HTMLElement>('[data-deniel-cursor]')
     const moveUser = (event: PointerEvent) => { if (!touch && !reduce && userCursor) gsap.to(userCursor, { x: event.clientX, y: event.clientY, duration: .18, ease: 'power2.out', overwrite: true }) }
-    const moveDeniel = (target: Element, mode: string, text: string) => {
-      if (!denielCursor || reduce || touch) return
-      const rect = target.getBoundingClientRect()
-      const x = rect.left + Math.min(rect.width * .55, 220)
-      const y = rect.top + Math.min(rect.height * .52, 80)
-      gsap.killTweensOf(denielCursor)
-      const index = interactions.findIndex((item) => item.selector === `[data-cursor-target="${target.getAttribute('data-cursor-target')}"]`)
-      const direction = index % 2 === 0 ? 1 : -1
-      const lift = 44 + (index % 3) * 18
-      const sway = direction * (70 + (index % 4) * 22)
-      gsap.set(denielCursor, { x: 0, y: 0, left: x, top: y })
-      const tl = gsap.timeline({ delay: .08 })
-      tl.to(denielCursor, { keyframes: [{ left: x - sway * .55, top: y + lift }, { left: x + sway * .28, top: y - lift * .35 }, { left: x + direction * 14, top: y + 8 }, { left: x, top: y }], duration: .95 + (index % 3) * .12, ease: 'power2.inOut' })
-        .to(denielCursor, { left: x - direction * 5, top: y + 3, duration: .11, ease: 'power2.out' })
-        .to(denielCursor, { left: x, top: y, scale: .82, duration: .13, ease: 'power2.in' })
-        .to(denielCursor, { scale: 1, duration: .24, ease: 'back.out(2)' })
-      if (mode === 'highlight') tl.to(target, { backgroundColor: 'var(--coral)', color: 'var(--foreground)', paddingInline: '.35rem', duration: .2 }).to(target, { backgroundColor: 'transparent', color: '', paddingInline: 0, duration: .65, delay: .2 })
-      if (mode === 'resize') tl.to(denielCursor, { left: x + 54, duration: .4, ease: 'power2.inOut' }).to(target, { scaleX: 1.035, transformOrigin: 'left center', duration: .35 }).to(target, { scaleX: 1, duration: .45 })
-      if (mode === 'type') tl.to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16, repeat: 2, yoyo: true }).to(denielCursor, { left: x + Math.min(text.length * 3, 90), duration: .45 })
-      tl.to(denielCursor, { left: `+=${direction * 7}`, top: `+=${index % 2 ? -5 : 5}`, duration: .8, ease: 'sine.inOut', repeat: -1, yoyo: true })
+
+    const getTargetPoint = (element: Element) => {
+      const rect = element.getBoundingClientRect()
+      if (!rect.width || !rect.height) return null
+      return { x: Math.max(18, Math.min(window.innerWidth - 24, rect.left + Math.min(rect.width * .55, 220))), y: Math.max(24, Math.min(window.innerHeight - 32, rect.top + Math.min(rect.height * .52, 80))) }
     }
+
+    const runArrival = (target: Element, interaction: Interaction, point: { x: number; y: number }) => {
+      if (!denielCursor || reduce || touch) return
+      const index = interactions.indexOf(interaction)
+      const direction = index % 2 === 0 ? 1 : -1
+      const from = { x: Number(gsap.getProperty(denielCursor, 'left')) || point.x, y: Number(gsap.getProperty(denielCursor, 'top')) || point.y }
+      const bend = 70 + (index % 4) * 24
+      const lift = 44 + (index % 3) * 20
+      gsap.killTweensOf(denielCursor)
+      const timeline = gsap.timeline({ delay: .12 })
+      timeline.set(denielCursor, { left: from.x, top: from.y, x: 0, y: 0 })
+        .to(denielCursor, { motionPath: { path: [{ x: from.x, y: from.y }, { x: from.x + direction * bend, y: from.y - lift }, { x: point.x - direction * bend * .55, y: point.y + lift }, { x: point.x, y: point.y }], curviness: 1.25 }, duration: .85 + (index % 3) * .15, ease: 'power2.inOut' })
+        .to(denielCursor, { left: point.x - direction * 5, top: point.y + 3, duration: .1, ease: 'power2.out' })
+        .to(denielCursor, { left: point.x, top: point.y, scale: .82, duration: .12, ease: 'power2.in' })
+        .to(denielCursor, { scale: 1, duration: .22, ease: 'back.out(2)' })
+
+      if (interaction.mode === 'highlight') timeline.to(target, { backgroundColor: 'var(--coral)', color: 'var(--foreground)', paddingInline: '.35rem', duration: .2 }).to(target, { backgroundColor: 'transparent', color: '', paddingInline: 0, duration: .65, delay: .2 })
+      if (interaction.mode === 'resize') timeline.to(denielCursor, { left: point.x + 54, duration: .4, ease: 'power2.inOut' }).to(target, { scaleX: 1.035, transformOrigin: 'left center', duration: .35 }).to(target, { scaleX: 1, duration: .45 })
+      if (interaction.mode === 'type') timeline.to(target, { opacity: .35, duration: .16 }).to(target, { opacity: 1, duration: .16, repeat: 2, yoyo: true }).to(denielCursor, { left: point.x + Math.min(interaction.text.length * 3, 90), duration: .45 })
+      if (interaction.mode === 'click') timeline.to(denielCursor, { scale: .72, duration: .1 }).to(denielCursor, { scale: 1, duration: .2, ease: 'back.out(2)' })
+      timeline.to(denielCursor, { left: `+=${direction * 7}`, top: `+=${index % 2 ? -5 : 5}`, duration: .7, ease: 'sine.inOut', repeat: 3, yoyo: true })
+    }
+
+    let activeIndex = -1
+    const updateTargets = () => {
+      if (touch || reduce) return
+      const nextIndex = interactions.findIndex((interaction) => {
+        const element = document.querySelector(interaction.selector)
+        if (!element) return false
+        const rect = element.getBoundingClientRect()
+        return rect.top < window.innerHeight * .72 && rect.bottom > window.innerHeight * .2
+      })
+      if (nextIndex < 0 || nextIndex === activeIndex) return
+      const interaction = interactions[nextIndex]
+      const target = document.querySelector(interaction.selector)
+      const point = target ? getTargetPoint(target) : null
+      if (!target || !point) return
+      activeIndex = nextIndex
+      runArrival(target, interaction, point)
+    }
+
+    const refreshPositions = () => { ScrollTrigger.refresh(); updateTargets() }
     window.addEventListener('pointermove', moveUser)
-    const refresh = () => ScrollTrigger.refresh()
+    window.addEventListener('scroll', updateTargets, { passive: true })
+    window.addEventListener('resize', refreshPositions)
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((element) => gsap.fromTo(element, { autoAlpha: 0, y: 36 }, { autoAlpha: 1, y: 0, duration: .85, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 86%', once: true } }))
       gsap.utils.toArray<HTMLElement>('[data-stagger]').forEach((group) => gsap.fromTo(group.children, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .7, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: group, start: 'top 84%', once: true } }))
-      interactions.forEach(({ selector, mode, text }) => { const target = document.querySelector(selector); if (target) ScrollTrigger.create({ trigger: target, start: 'top 68%', once: true, onEnter: () => moveDeniel(target, mode, text) }) })
+      updateTargets()
     })
-    window.addEventListener('load', refresh)
-    return () => { window.clearTimeout(introTimer); window.removeEventListener('pointermove', moveUser); window.removeEventListener('load', refresh); ctx.revert() }
+    window.addEventListener('load', refreshPositions)
+    return () => { window.clearTimeout(introTimer); window.removeEventListener('pointermove', moveUser); window.removeEventListener('scroll', updateTargets); window.removeEventListener('resize', refreshPositions); window.removeEventListener('load', refreshPositions); gsap.killTweensOf(denielCursor); ctx.revert() }
   }, [])
+
   return <><div className={`site-loader ${loading ? 'is-visible' : 'is-hidden'}`} aria-hidden={!loading}><div className="loader-mark">D<span>.</span></div><div className="loader-line"><i /></div><p>Making useful things</p></div><div className="site-cursor user-cursor" data-user-cursor aria-hidden="true"><PointerIcon color="var(--teal)" /><span className="cursor-name-tag">You</span></div><div className="deniel-cursor" data-deniel-cursor aria-hidden="true"><PointerIcon color="var(--coral)" /><span className="cursor-name-tag">Deniel</span></div></>
 }
